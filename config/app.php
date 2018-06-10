@@ -164,6 +164,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
+        Overtrue\LaravelWeChat\ServiceProvider::class,
 
         /*
          * Package Service Providers...
