@@ -34,5 +34,25 @@ class TryoutProductRepositoryEloquent extends BaseRepository implements TryoutPr
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
+    public function getList()
+    {
+        $result = $this->model->leftJoin('ss_product', 'ss_tryout_product.product_id', '=', 'ss_product.id')
+            ->select('ss_tryout_product.*', 'ss_product.name', 'ss_product.description','ss_product.image')
+            ->get()
+            ->toArray();
+        return $result;
+    }
+
+    public function getDetails($id)
+    {
+        $result = $this->model->leftJoin('ss_product', 'ss_tryout_product.product_id', '=', 'ss_product.id')
+            ->where('ss_tryout_product.id', $id)
+            ->select('ss_tryout_product.*', 'ss_product.name', 'ss_product.description','ss_product.image','ss_product.price')
+            ->first();
+        if (!empty($result)) {
+            $result = $result->toArray();
+        }
+        return $result;
+    }
 }

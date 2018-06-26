@@ -7,14 +7,14 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class Member.
+ * Class Vote.
  *
  * @package namespace App\Models;
  */
-class Member extends Model implements Transformable
+class Vote extends Model implements Transformable
 {
     use TransformableTrait;
-    protected $table = 'ss_member';
+    protected $table = 'ss_vote_log';
 
     /**
      * The attributes that are mass assignable.
@@ -22,14 +22,10 @@ class Member extends Model implements Transformable
      * @var array
      */
     protected $fillable = [
-        'username',
-        'password',
+        'enlt_id',
         'nickname',
         'headimgurl',
-        'email',
-        'phone',
-        'realname',
-        'status',
+        'member_id'
     ];
 
     /**
@@ -40,4 +36,5 @@ class Member extends Model implements Transformable
     public function fromDateTime($value){
         return strtotime(parent::fromDateTime($value));
     }
+
 }

@@ -175,10 +175,10 @@ $(function () {
     function preload(){
         $(window).on("load", function(){
             var imgList = [
-                "./images/layers/content.png",
-                "./images/layers/navigation.png",
-                "./images/layers/popout.png",
-                "./images/layers/transparent.gif"
+                "/static/weui/images/layers/content.png",
+                "/static/weui/images/layers/navigation.png",
+                "/static/weui/images/layers/popout.png",
+                "/static/weui/images/layers/transparent.gif"
             ];
             for (var i = 0, len = imgList.length; i < len; ++i) {
                 new Image().src = imgList[i];
@@ -202,93 +202,93 @@ $(function () {
             })
         }
     }
-    function setJSAPI(){
-        var option = {
-            title: 'WeUI, 为微信 Web 服务量身设计',
-            desc: 'WeUI, 为微信 Web 服务量身设计',
-            link: "https://weui.io",
-            imgUrl: 'https://mmbiz.qpic.cn/mmemoticon/ajNVdqHZLLA16apETUPXh9Q5GLpSic7lGuiaic0jqMt4UY8P4KHSBpEWgM7uMlbxxnVR7596b3NPjUfwg7cFbfCtA/0'
-        };
-
-        $.getJSON('https://weui.io/api/sign?url=' + encodeURIComponent(location.href.split('#')[0]), function (res) {
-            wx.config({
-                beta: true,
-                debug: false,
-                appId: res.appid,
-                timestamp: res.timestamp,
-                nonceStr: res.nonceStr,
-                signature: res.signature,
-                jsApiList: [
-                    'onMenuShareTimeline',
-                    'onMenuShareAppMessage',
-                    'onMenuShareQQ',
-                    'onMenuShareWeibo',
-                    'onMenuShareQZone',
-                    // 'setNavigationBarColor',
-                    'setBounceBackground'
-                ]
-            });
-            wx.ready(function () {
-                /*
-                 wx.invoke('setNavigationBarColor', {
-                 color: '#F8F8F8'
-                 });
-                 */
-                wx.invoke('setBounceBackground', {
-                    'backgroundColor': '#F8F8F8',
-                    'footerBounceColor' : '#F8F8F8'
-                });
-                wx.onMenuShareTimeline(option);
-                wx.onMenuShareQQ(option);
-                wx.onMenuShareAppMessage({
-                    title: 'WeUI',
-                    desc: '为微信 Web 服务量身设计',
-                    link: location.href,
-                    imgUrl: 'https://mmbiz.qpic.cn/mmemoticon/ajNVdqHZLLA16apETUPXh9Q5GLpSic7lGuiaic0jqMt4UY8P4KHSBpEWgM7uMlbxxnVR7596b3NPjUfwg7cFbfCtA/0'
-                });
-            });
-        });
-    }
-    function setPageManager(){
-        var pages = {}, tpls = $('script[type="text/html"]');
-        var winH = $(window).height();
-
-        for (var i = 0, len = tpls.length; i < len; ++i) {
-            var tpl = tpls[i], name = tpl.id.replace(/tpl_/, '');
-            pages[name] = {
-                name: name,
-                url: '#' + name,
-                template: '#' + tpl.id
-            };
-        }
-        pages.home.url = '#';
-
-        for (var page in pages) {
-            pageManager.push(pages[page]);
-        }
-        pageManager
-            .setPageAppend(function($html){
-                var $foot = $html.find('.page__ft');
-                if($foot.length < 1) return;
-
-                if($foot.position().top + $foot.height() < winH){
-                    $foot.addClass('j_bottom');
-                }else{
-                    $foot.removeClass('j_bottom');
-                }
-            })
-            .setDefault('home')
-            .init();
-    }
+    // function setJSAPI(){
+    //     var option = {
+    //         title: 'WeUI, 为微信 Web 服务量身设计',
+    //         desc: 'WeUI, 为微信 Web 服务量身设计',
+    //         link: "https://weui.io",
+    //         imgUrl: 'https://mmbiz.qpic.cn/mmemoticon/ajNVdqHZLLA16apETUPXh9Q5GLpSic7lGuiaic0jqMt4UY8P4KHSBpEWgM7uMlbxxnVR7596b3NPjUfwg7cFbfCtA/0'
+    //     };
+    //
+    //     $.getJSON('https://weui.io/api/sign?url=' + encodeURIComponent(location.href.split('#')[0]), function (res) {
+    //         wx.config({
+    //             beta: true,
+    //             debug: false,
+    //             appId: res.appid,
+    //             timestamp: res.timestamp,
+    //             nonceStr: res.nonceStr,
+    //             signature: res.signature,
+    //             jsApiList: [
+    //                 'onMenuShareTimeline',
+    //                 'onMenuShareAppMessage',
+    //                 'onMenuShareQQ',
+    //                 'onMenuShareWeibo',
+    //                 'onMenuShareQZone',
+    //                 // 'setNavigationBarColor',
+    //                 'setBounceBackground'
+    //             ]
+    //         });
+    //         wx.ready(function () {
+    //             /*
+    //              wx.invoke('setNavigationBarColor', {
+    //              color: '#F8F8F8'
+    //              });
+    //              */
+    //             wx.invoke('setBounceBackground', {
+    //                 'backgroundColor': '#F8F8F8',
+    //                 'footerBounceColor' : '#F8F8F8'
+    //             });
+    //             wx.onMenuShareTimeline(option);
+    //             wx.onMenuShareQQ(option);
+    //             wx.onMenuShareAppMessage({
+    //                 title: 'WeUI',
+    //                 desc: '为微信 Web 服务量身设计',
+    //                 link: location.href,
+    //                 imgUrl: 'https://mmbiz.qpic.cn/mmemoticon/ajNVdqHZLLA16apETUPXh9Q5GLpSic7lGuiaic0jqMt4UY8P4KHSBpEWgM7uMlbxxnVR7596b3NPjUfwg7cFbfCtA/0'
+    //             });
+    //         });
+    //     });
+    // }
+    // function setPageManager(){
+    //     var pages = {}, tpls = $('script[type="text/html"]');
+    //     var winH = $(window).height();
+    //
+    //     for (var i = 0, len = tpls.length; i < len; ++i) {
+    //         var tpl = tpls[i], name = tpl.id.replace(/tpl_/, '');
+    //         pages[name] = {
+    //             name: name,
+    //             url: '#' + name,
+    //             template: '#' + tpl.id
+    //         };
+    //     }
+    //     pages.home.url = '#';
+    //
+    //     for (var page in pages) {
+    //         pageManager.push(pages[page]);
+    //     }
+    //     pageManager
+    //         .setPageAppend(function($html){
+    //             var $foot = $html.find('.page__ft');
+    //             if($foot.length < 1) return;
+    //
+    //             if($foot.position().top + $foot.height() < winH){
+    //                 $foot.addClass('j_bottom');
+    //             }else{
+    //                 $foot.removeClass('j_bottom');
+    //             }
+    //         })
+    //         .setDefault('home')
+    //         .init();
+    // }
 
     function init(){
         preload();
         fastClick();
         androidInputBugFix();
-        setJSAPI();
-        setPageManager();
+        // setJSAPI();
+        // setPageManager();
 
-        window.pageManager = pageManager;
+        // window.pageManager = pageManager;
         window.home = function(){
             location.hash = '';
         };

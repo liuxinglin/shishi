@@ -29,4 +29,14 @@ class MemberService
     {
 
     }
+
+    public function bindPhone(Request $request)
+    {
+        $data = $request->except('_token');
+        if (empty($data['phone'])) {
+            throw  new \Exception('电手机号码不能为空', 1);
+        }
+        $result = $this->repository->update(['phone' => $data['phone']], $data['member_id']);
+        return $result;
+    }
 }

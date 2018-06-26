@@ -22,11 +22,12 @@ class TryoutProductService
 
     public function getTryoutProductList(Request $request)
     {
-        return $this->repository->all();
+        return $this->repository->getList();
     }
 
-    public function getDetails($id)
+    public function getDetails(Request $request)
     {
-        return $this->repository->find($id);
+        $id = $request->get('id', '');
+        return $this->repository->getDetails($id);
     }
 }

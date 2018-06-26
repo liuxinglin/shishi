@@ -34,5 +34,13 @@ class MemberRepositoryEloquent extends BaseRepository implements MemberRepositor
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
+    public function getDetails($id)
+    {
+        $result = $this->model->where('id', $id)->first();
+        if (!empty($result)) {
+            $result = $result->toArray();
+        }
+        return $result;
+    }
 }

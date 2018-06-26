@@ -22,7 +22,7 @@ class TryoutProductController extends Controller
     public function index(Request $request)
     {
         $data = $this->service->getTryoutProductList($request);
-        return view('home.product.tryout', compact('data'));
+        return view('home.tryout_product.index', compact('data'));
     }
 
     /**
@@ -52,9 +52,10 @@ class TryoutProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $data = $this->service->getDetails($request);
+        return view('home.tryout_product.show', compact('data'));
     }
 
     /**

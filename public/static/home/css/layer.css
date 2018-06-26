@@ -1,0 +1,15 @@
+.layer-close {
+    background:#333;
+    font-size: 12px;
+    position:absolute;
+    right:-8px;
+    top:-8px;
+    border-radius:50%;
+    width:20px;
+    height:20px;
+    line-height:20px;
+    border: solid 1px #FFF;
+    text-align: center;
+    color: #FFF;
+    z-index: 1000;
+}

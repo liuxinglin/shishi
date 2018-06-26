@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Services\MemberService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class MemberController extends Controller
 {
+    public $service;
+    public function __construct(MemberService $member)
+    {
+        $this->service = $member;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,7 @@ class MemberController extends Controller
      */
     public function index()
     {
-        //
+        return view('home.member.index');
     }
 
     /**
@@ -81,5 +88,15 @@ class MemberController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function bindPhone(Request $request)
+    {
+        try {
+            $result = $this->service->bindPhone($request);
+            return response()->json(['msg' => '绑定手机号成功', 'code' => 0, 'data' => '']);
+        } catch (\Exception $e) {
+            return response()->json(['msg' => $e->getMessage(), 'code' => $e->getCode()]);
+        }
     }
 }

@@ -7,14 +7,14 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class Member.
+ * Class Enrolment.
  *
  * @package namespace App\Models;
  */
-class Member extends Model implements Transformable
+class Enrolment extends Model implements Transformable
 {
     use TransformableTrait;
-    protected $table = 'ss_member';
+    protected $table = 'ss_enrolment';
 
     /**
      * The attributes that are mass assignable.
@@ -22,14 +22,12 @@ class Member extends Model implements Transformable
      * @var array
      */
     protected $fillable = [
-        'username',
-        'password',
+        'member_id',
         'nickname',
-        'headimgurl',
-        'email',
+        'tryout_id',
         'phone',
-        'realname',
-        'status',
+        'product_id',
+        'votes_num'
     ];
 
     /**

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Home;
 
-use App\Services\ProductService;
+use App\Services\EnrolmentService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ProductController extends Controller
+class EnrolmentController extends Controller
 {
-    protected $service;
-    public function __construct(ProductService $service)
+    public $service;
+    public function __construct(EnrolmentService $service)
     {
         $this->service = $service;
     }
@@ -19,11 +19,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $data = $this->service->getProductList($request);
-        //var_dump($data);
-        return view('home.product.index', compact('data'));
+        //
     }
 
     /**
@@ -44,7 +42,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $result = $this->service->add($request);
+            return response()->json(['msg' => '报名成功', 'code' => 0, 'data' => $result]);
+        } catch (\Exception $e) {
+            return response()->json(['msg' => $e->getMessage(), 'code' => $e->getCode()]);
+        }
     }
 
     /**
@@ -53,9 +56,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $data = $this->service->getDetails($request);
+        return view('home.enrolment.show', compact('data'));
     }
 
     /**
