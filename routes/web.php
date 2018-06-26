@@ -29,6 +29,12 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend'], function () {
 });
 
 Route::group(['namespace' => 'Home'], function () {
+    //登录注册
+    Route::get('/auth/register', 'AuthController@toReg');
+    Route::post('/auth/register', 'AuthController@register');
+    Route::post('/auth/login', 'AuthController@login');
+    Route::get('/auth/login', 'AuthController@toLogin');
+
     Route::get('/members/index', 'MemberController@index');
     Route::post('/members/bindPhone', 'MemberController@bindPhone');
     Route::get('/product/index', 'ProductController@index');

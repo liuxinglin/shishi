@@ -606,6 +606,49 @@ img {
     left: 0px;
 }
 
+.auth {
+    background-color: #FFFFFF;
+}
+
+.auth .logo {
+    background: url(/static/home/images/bg_register.png) no-repeat;
+    background-size: 100% 100%;
+    padding: 25vw;
+    text-align: center;
+}
+
+.logo .weui-media-box__thumb {
+    border-radius: 0px;
+    width: 35vw;
+}
+
+.choice {
+    position: relative;
+    padding: 10vw;
+}
+
+.auth .login {
+    background: url(/static/home/images/btn_register.png) no-repeat;
+    width: 100%;
+    height:12vw;
+    background-size:100% 100%;
+    border: none;
+    color: #ff3333;
+    font-size: 5vw;
+    margin-bottom: 5vw
+}
+
+.auth .register {
+    background: url(/static/home/images/btn_register2.png) no-repeat;
+    width: 100%;
+    height:12vw;
+    background-size:100% 100%;
+    border: none;
+    color: #ff3333;
+    font-size: 5vw;
+    margin-bottom: 5vw
+}
+
 
 
 
