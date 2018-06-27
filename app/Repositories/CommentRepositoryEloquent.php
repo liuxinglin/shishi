@@ -4,16 +4,16 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\MemberRepository;
-use App\Models\Member;
-use App\Validators\MemberValidator;
+use App\Repositories\CommentRepository;
+use App\Models\Comment;
+use App\Validators\CommentValidator;
 
 /**
- * Class MemberRepositoryEloquent.
+ * Class CommentRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class MemberRepositoryEloquent extends BaseRepository implements MemberRepository
+class CommentRepositoryEloquent extends BaseRepository implements CommentRepository
 {
     /**
      * Specify Model class name
@@ -22,7 +22,7 @@ class MemberRepositoryEloquent extends BaseRepository implements MemberRepositor
      */
     public function model()
     {
-        return Member::class;
+        return Comment::class;
     }
 
     
@@ -34,13 +34,5 @@ class MemberRepositoryEloquent extends BaseRepository implements MemberRepositor
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-
-    public function getDetails($where)
-    {
-        $result = $this->model->where($where)->first();
-        if (!empty($result)) {
-            $result = $result->toArray();
-        }
-        return $result;
-    }
+    
 }

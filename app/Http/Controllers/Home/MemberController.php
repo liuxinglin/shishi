@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Formatters\AppFormatter;
 use App\Services\MemberService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,9 +10,11 @@ use App\Http\Controllers\Controller;
 class MemberController extends Controller
 {
     public $service;
-    public function __construct(MemberService $member)
+    public $formatter;
+    public function __construct(MemberService $member, AppFormatter $formatter)
     {
         $this->service = $member;
+        $this->formatter = $formatter;
     }
 
     /**
@@ -94,9 +97,12 @@ class MemberController extends Controller
     {
         try {
             $result = $this->service->bindPhone($request);
-            return response()->json(['msg' => '绑定手机号成功', 'code' => 0, 'data' => '']);
+            if (!$result) {
+                return response()->json($this->formatter->formatFail(0, [], '绑定手机号码失败'));
+            }
+            return response()->json($this->formatter->format([], '绑定手机号码成功'));
         } catch (\Exception $e) {
-            return response()->json(['msg' => $e->getMessage(), 'code' => $e->getCode()]);
+            return response()->json($this->formatter->formatException($e));
         }
     }
 }

@@ -49,7 +49,7 @@ class VoteRepositoryEloquent extends BaseRepository implements VoteRepository
         return $result;
     }
 
-    public function getVoteNum($where)
+    public function getVoteCount($where)
     {
         $result = $this->model->where($where)->count();
         return $result;

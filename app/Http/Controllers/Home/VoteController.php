@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Formatters\AppFormatter;
 use App\Services\VoteService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,9 +10,11 @@ use App\Http\Controllers\Controller;
 class VoteController extends Controller
 {
     public $service;
-    public function __construct(VoteService $vote)
+    public $formatter;
+    public function __construct(VoteService $vote, AppFormatter $formatter)
     {
         $this->service = $vote;
+        $this->formatter = $formatter;
     }
 
     /**
@@ -21,7 +24,7 @@ class VoteController extends Controller
      */
     public function index()
     {
-        //
+        return true;
     }
 
     /**
@@ -31,7 +34,7 @@ class VoteController extends Controller
      */
     public function create()
     {
-        //
+        return true;
     }
 
     /**
@@ -44,9 +47,12 @@ class VoteController extends Controller
     {
         try {
             $result = $this->service->add($request);
-            return response()->json(['msg' => '投票成功', 'code' => 0, 'data' => $result]);
+            if (empty($result)) {
+                return response()->json($this->formatter->formatFail(0, [], '投票失败'));
+            }
+            return response()->json($this->formatter->format([], '投票成功'));
         } catch (\Exception $e) {
-            return response()->json(['msg' => $e->getMessage(), 'code' => $e->getCode()]);
+            return response()->json($this->formatter->formatException($e));
         }
     }
 
@@ -58,7 +64,7 @@ class VoteController extends Controller
      */
     public function show($id)
     {
-        //
+        return true;
     }
 
     /**
@@ -69,7 +75,7 @@ class VoteController extends Controller
      */
     public function edit($id)
     {
-        //
+        return true;
     }
 
     /**
@@ -81,7 +87,7 @@ class VoteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return true;
     }
 
     /**
@@ -92,6 +98,6 @@ class VoteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return true;
     }
 }

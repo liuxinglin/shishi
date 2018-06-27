@@ -35,14 +35,21 @@ class VoteService
             throw new \Exception('不存在该会员', 1);
         }
         //判断是否投过票
-        $voteInfo = $this->repository->getDetails(['member_id' => $data['member_id'], 'enlt_id' => $data['enlt_id']]);
-        if (!empty($voteInfo)) {
+        $isVote = $this->repository->getVoteCount(['member_id' => $data['member_id'], 'enlt_id' => $data['enlt_id']]);
+        if (!empty($isVote)) {
             throw new \Exception('您已为该好友投过票', 2);
         }
         $data['nickname'] = $memberInfo['nickname'];
         $data['headimgurl'] = $memberInfo['headimgurl'];
         $result = $this->repository->create($data);
-        $this->enrolment->increment(['id' => $data['enlt_id']], 'votes_num', 1);
-        return $result;
+        if (!empty($result)) {
+            $this->enrolment->increment(['id' => $data['enlt_id']], 'votes_num', 1);
+        }
+        return true;
+    }
+
+    public function getVoteCount($where)
+    {
+       return $this->repository->getVoteCount($where);
     }
 }

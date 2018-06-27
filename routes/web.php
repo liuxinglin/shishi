@@ -30,21 +30,24 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend'], function () {
 
 Route::group(['namespace' => 'Home'], function () {
     //登录注册
-    Route::get('/auth/register', 'AuthController@toReg');
+    Route::get('/auth/index', 'AuthController@index')->name('auth.index');
     Route::post('/auth/register', 'AuthController@register');
     Route::post('/auth/login', 'AuthController@login');
-    Route::get('/auth/login', 'AuthController@toLogin');
+    Route::group(['middleware' => 'home.auth'], function () {
+        Route::get('/members/index', 'MemberController@index');
+        Route::post('/members/bindPhone', 'MemberController@bindPhone');
+        Route::get('/products/index', 'ProductController@index');
+        Route::get('/tryoutProducts/details', 'TryoutProductController@show');
+        Route::get('/tryoutProducts/list', 'TryoutProductController@index');
+        Route::resource('products', 'ProductController');
+        Route::resource('enrolments', 'EnrolmentController');
+        Route::post('/enrolments/add', 'EnrolmentController@store');
+        Route::get('/enrolments/details', 'EnrolmentController@show');
+        Route::post('/votes/add', 'VoteController@store');
 
-    Route::get('/members/index', 'MemberController@index');
-    Route::post('/members/bindPhone', 'MemberController@bindPhone');
-    Route::get('/product/index', 'ProductController@index');
-    Route::get('/tryoutProducts/details', 'TryoutProductController@show');
-    Route::get('/tryoutProducts/list', 'TryoutProductController@index');
-    Route::resource('products', 'ProductController');
-    Route::resource('enrolments', 'EnrolmentController');
-    Route::post('/enrolments/add', 'EnrolmentController@store');
-    Route::get('/enrolments/details', 'EnrolmentController@show');
-    Route::post('/votes/add', 'VoteController@store');
+        //评论
+        Route::post('/comments/add', 'CommentController@store');
+    });
 });
 
 
