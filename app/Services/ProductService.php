@@ -21,4 +21,9 @@ class ProductService
     {
         return $this->repository->all();
     }
+
+    public function getDetails(Request $request)
+    {
+
+    }
 }

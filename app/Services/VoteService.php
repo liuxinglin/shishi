@@ -29,7 +29,7 @@ class VoteService
     public function add(Request $request)
     {
         $data = $request->except('_token');
-        $memberInfo = $this->member->getDetails($data['member_id']);
+        $memberInfo = $this->member->getDetails(['id' => $data['member_id']]);
 
         if (empty($memberInfo)) {
             throw new \Exception('不存在该会员', 1);
@@ -44,8 +44,9 @@ class VoteService
         $result = $this->repository->create($data);
         if (!empty($result)) {
             $this->enrolment->increment(['id' => $data['enlt_id']], 'votes_num', 1);
+            $result = $result->toArray();
         }
-        return true;
+        return $result;
     }
 
     public function getVoteCount($where)

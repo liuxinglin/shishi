@@ -33,7 +33,7 @@ class EnrolmentService
     {
         $memberId = $request->post('member_id', '');
         $tryoutId = $request->post('tryout_id', '');
-        $memberInfo = $this->member->getDetails($memberId);
+        $memberInfo = $this->member->getDetails(['id' => $memberId]);
         $tryoutInfo = $this->tryout->getDetails($tryoutId);
         if (empty($memberInfo['phone'])) {
             throw  new \Exception('请绑定手机号码！', 2);
@@ -59,11 +59,23 @@ class EnrolmentService
 
     public function getDetails(Request $request)
     {
+        $where = [];
         $id = $request->get('id', '');
-        $result = $this->repository->getDetails(['id' => $id]);
-        $result['member'] = $this->member->getDetails($result['member_id']);
+        $memberId = $request->get('member_id', '');
+        $tryoutId = $request->get('tryout_id', '');
+        if (!empty($id)) {
+            $where['id'] = $id;
+        }
+        if (!empty($memberId)) {
+            $where['member_id'] = $memberId;
+        }
+        if (!empty($tryoutId)) {
+            $where['tryout_id'] = $tryoutId;
+        }
+        $result = $this->repository->getDetails($where);
+        $result['member'] = $this->member->getDetails(['id' => $result['member_id']]);
         $result['tryout'] = $this->tryout->getDetails($result['tryout_id']);
-        $result['vote']['list'] = $this->vote->getVoteList(['enlt_id' => $id]);
+        $result['vote']['list'] = $this->vote->getVoteList(['enlt_id' => $result['id']]);
         $result['vote']['maxVoteNum'] = $this->repository->getMaxVotes(['tryout_id' => $result['tryout_id']]);
         return $result;
     }

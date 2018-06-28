@@ -44,7 +44,7 @@
                     $.ajax({
                         type: 'POST',
                         url: url,
-                        data: {'phone': phone, 'password': 'password', '_token': '{{ csrf_token() }}'},
+                        data: {'phone': phone, 'password': password, '_token': '{{ csrf_token() }}'},
                         success: function (rst) {
                             console.log(rst);
                             if(rst.status == false) {
@@ -61,6 +61,8 @@
                                     ,skin: 'msg'
                                     ,time: 2 //2秒后自动关闭
                                 })
+
+                                window.location.href = '/tryoutProducts/list';
                             }
                         }
                     })
@@ -95,7 +97,7 @@
                     $.ajax({
                         type: 'POST',
                         url: url,
-                        data: {'phone': phone, 'password': 'password', '_token': '{{ csrf_token() }}'},
+                        data: {'phone': phone, 'password': password, '_token': '{{ csrf_token() }}'},
                         success: function (rst) {
                             console.log(rst);
                             if(rst.code != 0) {

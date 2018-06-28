@@ -91,4 +91,10 @@ class MemberService
         }
         return $result;
     }
+
+    public function getDetails($id)
+    {
+        $result = $this->repository->getDetails(['id' => $id]);
+        return $result;
+    }
 }
