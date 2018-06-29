@@ -16,7 +16,7 @@ trait Format
         return [
             'status' => false,
             'code' => $e->getCode(),
-            'message' => $e->getMessage(),
+            'msg' => $e->getMessage(),
             'data' => [],
         ];
     }
@@ -26,7 +26,7 @@ trait Format
         return [
             'status' => false,
             'code' => $e->getCode(),
-            'message' => '操作失败',
+            'msg' => '操作失败',
             'data' => [],
         ];
     }
@@ -40,7 +40,7 @@ trait Format
         return [
             'status' => false,
             'code' => 0,
-            'message' => $message,
+            'msg' => $message,
             'data' => [],
         ];
     }
@@ -56,7 +56,7 @@ trait Format
         return [
             'status' => true,
             'code' => 0,
-            'message' => '',
+            'msg' => '',
             'data' => (empty($data) && $object) ? new \stdClass() : $data,
         ];
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Formatters\AppFormatter;
 use App\Services\EnrolmentService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,9 +10,11 @@ use App\Http\Controllers\Controller;
 class EnrolmentController extends Controller
 {
     public $service;
-    public function __construct(EnrolmentService $service)
+    public $formatter;
+    public function __construct(EnrolmentService $service, AppFormatter $formatter)
     {
         $this->service = $service;
+        $this->formatter = $formatter;
     }
 
     /**
@@ -44,9 +47,12 @@ class EnrolmentController extends Controller
     {
         try {
             $result = $this->service->add($request);
-            return response()->json(['msg' => '报名成功', 'code' => 0, 'data' => $result]);
+            if (empty($result)) {
+                return response()->json($this->formatter->formatFail(0, [], '报名失败'));
+            }
+            return response()->json($this->formatter->format([], '报名成功'));
         } catch (\Exception $e) {
-            return response()->json(['msg' => $e->getMessage(), 'code' => $e->getCode()]);
+            return response()->json($this->formatter->formatException($e));
         }
     }
 

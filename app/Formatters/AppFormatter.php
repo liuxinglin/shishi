@@ -25,7 +25,7 @@ class AppFormatter
         return [
             'status' => $status,
             'code' => 0,
-            'message' => $message,
+            'msg' => $message,
             'data' => $items,
         ];
     }
@@ -43,7 +43,7 @@ class AppFormatter
         return [
             'status' => $status,
             'code' => $code,
-            'message' => $message,
+            'msg' => $message,
             'data' => $items,
         ];
     }

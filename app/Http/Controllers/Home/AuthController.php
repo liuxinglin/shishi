@@ -17,7 +17,7 @@ class AuthController extends Controller
         $this->formatter = $formatter;
     }
 
-    public function toReg()
+    public function index()
     {
         return view('home.auth.index');
     }

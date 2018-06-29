@@ -118,7 +118,7 @@
     <link rel="stylesheet" href="/static/home/css/layer.css"/>
     <script type="application/javascript">
         $('.signup').click(function () {
-            var member_id = 1;
+            var member_id = '{{ session('member.id') }}';
             var tryout_id = '{{ $data['id'] }}';
             var url = $(this).attr('data-url');
             $.ajax({
@@ -126,7 +126,16 @@
                 url: url,
                 data: {'member_id': member_id, 'tryout_id': tryout_id, '_token': '{{ csrf_token() }}'},
                 success: function (rst) {
-                    if(rst.code != 0) {
+                    if(rst.status == false) {
+                        if(rst.code == 1) {
+                            layer.open({
+                                content: rst.msg
+                                ,skin: 'msg'
+                                ,time: 2 //2秒后自动关闭
+                            });
+                            window.location.href = '/enrolments/details?member_id='+member_id+'tryout_id='+tryout_id;
+                            return false;
+                        }
                         if(rst.code == 2) {
                             layer.open({
                                 style: 'color:#333;text-align:left;font-size:14px;position:relative;width:80%',
