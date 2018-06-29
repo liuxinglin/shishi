@@ -62,6 +62,7 @@
                                     ,time: 2 //2秒后自动关闭
                                 })
                                 window.location.href = '/tryoutProducts/list'
+
                             }
                         }
                     })

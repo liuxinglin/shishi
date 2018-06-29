@@ -64,6 +64,7 @@ class EnrolmentService
 
     public function getDetails(Request $request)
     {
+        $where = [];
         $id = $request->get('id', '');
         $memberId = $request->get('member_id', '');
         $tryoutId = $request->get('tryout_id', '');
@@ -76,11 +77,10 @@ class EnrolmentService
         if (!empty($tryoutId)) {
             $where['tryout_id'] = $tryoutId;
         }
-
         $result = $this->repository->getDetails($where);
         $result['member'] = $this->member->getDetails(['id' => $result['member_id']]);
         $result['tryout'] = $this->tryout->getDetails($result['tryout_id']);
-        $result['vote']['list'] = $this->vote->getVoteList(['enlt_id' => $id]);
+        $result['vote']['list'] = $this->vote->getVoteList(['enlt_id' => $result['id']]);
         $result['vote']['maxVoteNum'] = $this->repository->getMaxVotes(['tryout_id' => $result['tryout_id']]);
         return $result;
     }

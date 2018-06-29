@@ -26,4 +26,9 @@ class CommentService
         $result = $this->repository->create($data);
         return $result;
     }
+
+    public function getList(Request $request)
+    {
+
+    }
 }

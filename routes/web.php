@@ -47,6 +47,8 @@ Route::group(['namespace' => 'Home'], function () {
 
         //评论
         Route::post('/comments/add', 'CommentController@store');
+        Route::get('/address/create', 'AddressController@create');
+        Route::post('/address/add', 'AddressController@store');
     });
 });
 

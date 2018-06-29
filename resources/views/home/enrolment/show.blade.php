@@ -34,7 +34,7 @@
             <div class="weui-panel__bd">已获得<span>{{ $data['votes_num'] }}</span>票，离第一名还差<span>{{ $data['vote']['maxVoteNum'] - $data['votes_num'] }}</span>票，加油</div>
             <button class="share">分享给好友，投我一票</button>
             <button class="share vote" data-url="/votes/add">帮好友投一票</button>
-            <button class="enrol-my">我也要免费拿</button>
+            <a href="/tryoutProducts/details?id={{ $data['tryout_id'] }}"><button class="enrol-my">我也要免费拿</button></a>
         </div>
 
         <div class="weui-panel weui-panel_access votes-friend">
@@ -77,7 +77,7 @@
     <link rel="stylesheet" href="/static/home/css/layer.css"/>
     <script type="application/javascript">
         $('.vote').click(function () {
-            var member_id = 2;
+            var member_id = '{{ session('member.id') }}';
             var enlt_id = '{{ $data['id'] }}';
             var url = $(this).attr('data-url');
             $.ajax({
@@ -85,11 +85,19 @@
                 url: url,
                 data: {'member_id': member_id, 'enlt_id': enlt_id, '_token': '{{ csrf_token() }}'},
                 success: function (rst) {
-                    if(rst.code != 0) {
-                        alert(rst.msg);
+                    if(rst.status == false) {
+                        layer.open({
+                            content: rst.msg
+                            ,skin: 'msg'
+                            ,time: 2 //2秒后自动关闭
+                        });
                         return false;
                     }
-
+                    layer.open({
+                        content: rst.msg
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                    });
                 }
             })
         })

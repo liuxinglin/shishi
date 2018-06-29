@@ -34,5 +34,14 @@ class CommentRepositoryEloquent extends BaseRepository implements CommentReposit
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
+    public function getList($where, $total = true)
+    {
+        $data = [];
+        $data['list'] = $this->model->where($where)->orderBy('id', 'DESC')->get()->toArray();
+        if ($total) {
+            $data['total'] = $this->model->where($where)->count();
+        }
+        return $data;
+    }
 }

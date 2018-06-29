@@ -44,8 +44,9 @@ class VoteService
         $result = $this->repository->create($data);
         if (!empty($result)) {
             $this->enrolment->increment(['id' => $data['enlt_id']], 'votes_num', 1);
+            $result = $result->toArray();
         }
-        return true;
+        return $result;
     }
 
     public function getVoteCount($where)

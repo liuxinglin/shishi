@@ -27,7 +27,7 @@ class AuthController extends Controller
         try {
             $result = $this->service->register($request);
             if (empty($result)) {
-                return response()->json($this->formatter->formatFail(0, '', '注册失败'));
+                return response()->json($this->formatter->formatFail(0, [], '注册失败'));
             }
             return response()->json($this->formatter->format($result, '注册成功'));
         } catch (\Exception $e) {
