@@ -1,5 +1,6 @@
 <?php
 namespace App\Services;
+use App\Repositories\CommentRepositoryEloquent;
 use App\Repositories\ProductRepositoryEloquent;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,10 @@ use Illuminate\Http\Request;
 class ProductService
 {
     protected $repository;
-    public function __construct(ProductRepositoryEloquent $repository)
+    public function __construct(ProductRepositoryEloquent $repository, CommentRepositoryEloquent $comment)
     {
         $this->repository = $repository;
+        $this->comment = $comment;
     }
 
     public function getProductList(Request $request)
@@ -22,8 +24,11 @@ class ProductService
         return $this->repository->all();
     }
 
-    public function getDetails(Request $request)
+    public function getDetails($id)
     {
-
+        $result = $this->repository->getDetails(['id' => $id]);
+        //查询评论信息
+        $result['comments'] = $this->comment->getList(['product_id' => $result['id']], true);
+        return $result;
     }
 }

@@ -38,6 +38,14 @@ class EnrolmentService
         if (empty($memberInfo['phone'])) {
             throw  new \Exception('请绑定手机号码！', 2);
         }
+        //判断是否在报名时间段
+        if ((time() < $tryoutInfo['begin_date']) || (time() > $tryoutInfo['end_date'])) {
+            throw  new \Exception('不在试用活动期！', 3);
+        }
+        //判断试用名额是否已满
+        if ($tryoutInfo['quantity'] == $tryoutInfo['signup_num']) {
+            throw  new \Exception('试用报名人数已满！', 3);
+        }
         //判断是否报名
         $enrolmentInfo = $this->repository->getDetails(['tryout_id' => $tryoutId, 'member_id' => $memberId]);
         if (!empty($enrolmentInfo)) {

@@ -97,7 +97,7 @@ img {
 }
 
 /*试用商品详情*/
-.product-details .free .weui-media-box__hd {
+.product-details .free .weui-media-box__hd, .product-details .price{
     text-align: left;
     width: 30%;
     float: left;
@@ -145,7 +145,7 @@ img {
 
 .sign-info .weui-media-box .weui-media-box__hd {
     text-align: left;
-    width: 50%;
+    width: 44%;
     float: left;
 }
 
@@ -154,7 +154,7 @@ img {
 }
 
 .sign-info .weui-media-box .weui-media-box__bd {
-    width: 50%;
+    width: 56%;
     float: left;
     text-align: right;
     font-size: 4.8vw;

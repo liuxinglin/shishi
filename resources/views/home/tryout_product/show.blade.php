@@ -24,7 +24,7 @@
                             <img src="/static/home/images/img_goodstab2.png">
                         </div>
                         <div class="weui-media-box__bd">
-                            <p>剩余时间   <span>21:12:21</span></p>
+                            <p class="countdown">剩余时间   <span id="time"></span></p>
                         </div>
                     </div>
                     <div class="product-promise">
@@ -118,9 +118,16 @@
     </div>
 @endsection
 @section('my-js')
+    <script type="application/javascript" src="/static/home/js/downCount.js"></script>
     <script type="application/javascript" src="/static/layer_mobile/layer.js"></script>
     <link rel="stylesheet" href="/static/home/css/layer.css"/>
     <script type="application/javascript">
+        $('.countdown').downCount({
+            date: '{{ date('Y/m/d H:i:s', $data['end_date']) }}'
+        }, function (){
+            alert('倒计时结束!');
+        });
+
         $('.signup').click(function () {
             var member_id = '{{ session('member.id') }}';
             var tryout_id = '{{ $data['id'] }}';
