@@ -31,7 +31,7 @@
                                         <p><span class="product-price">￥{{ $product['price'] }}</span><span class="product-buy-num">已抢8.5万件</span></p>
                                     </div>
                                     <div class="weui-media-box__bd">
-                                        <a href="/tryoutProducts/details?id={{ $product['id'] }}"><button class="button-try">马上抢</button></a>
+                                        <a href="/products/details?id={{ $product['id'] }}"><button class="button-try">马上抢</button></a>
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                         <p><span class="product-price">￥{{ $product['price'] }}</span><span class="product-buy-num">已抢8.5万件</span></p>
                                     </div>
                                     <div class="weui-media-box__bd">
-                                        <a href="/tryoutProducts/details?id={{ $product['id'] }}"><button class="button-try">马上抢</button></a>
+                                        <a href="/products/details?id={{ $product['id'] }}"><button class="button-try">马上抢</button></a>
                                     </div>
                                 </div>
                             </div>

@@ -37,6 +37,9 @@ Route::group(['namespace' => 'Home'], function () {
         Route::get('/members/index', 'MemberController@index');
         Route::post('/members/bindPhone', 'MemberController@bindPhone');
         Route::get('/products/index', 'ProductController@index');
+        Route::get('/products/details', 'ProductController@show');
+
+
         Route::get('/tryoutProducts/details', 'TryoutProductController@show');
         Route::get('/tryoutProducts/list', 'TryoutProductController@index');
         Route::resource('products', 'ProductController');
@@ -49,6 +52,8 @@ Route::group(['namespace' => 'Home'], function () {
         Route::post('/comments/add', 'CommentController@store');
         Route::get('/address/create', 'AddressController@create');
         Route::post('/address/add', 'AddressController@store');
+        Route::get('/orders/create', 'OrderController@create');
+        Route::post('/orders/add', 'OrderController@store');
     });
 });
 

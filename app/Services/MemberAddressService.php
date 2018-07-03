@@ -20,6 +20,12 @@ class MemberAddressService
         $this->repository = $memberAddress;
     }
 
+    public function getList($memberId)
+    {
+        $result = $this->repository->all()->toArray();
+        return $result;
+    }
+
     public function add(Request $request)
     {
         $data = $request->except('_token');

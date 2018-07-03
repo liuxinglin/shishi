@@ -53,9 +53,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $data = $this->service->getDetails($request);
+        return view('home.product.show', compact('data'));
     }
 
     /**
