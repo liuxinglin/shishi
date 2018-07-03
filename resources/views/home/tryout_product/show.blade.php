@@ -125,7 +125,7 @@
         $('.countdown').downCount({
             date: '{{ date('Y/m/d H:i:s', $data['end_date']) }}'
         }, function (){
-            container.find('#time').text('报名已结束！');
+            $('#time').text('报名已结束！');
         });
 
         $('.signup').click(function () {
