@@ -21,7 +21,8 @@ class TryoutProductController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $this->service->getTryoutProductList($request);
+        $where = $request->except('_token');
+        $data = $this->service->getTryoutProductList($where);
         return view('home.tryout_product.index', compact('data'));
     }
 
@@ -54,7 +55,8 @@ class TryoutProductController extends Controller
      */
     public function show(Request $request)
     {
-        $data = $this->service->getDetails($request);
+        $id = $request->get('id', '');
+        $data = $this->service->getDetails($id);
         return view('home.tryout_product.show', compact('data'));
     }
 

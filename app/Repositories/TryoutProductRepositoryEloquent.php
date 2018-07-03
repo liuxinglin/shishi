@@ -38,6 +38,8 @@ class TryoutProductRepositoryEloquent extends BaseRepository implements TryoutPr
     public function getList()
     {
         $result = $this->model->leftJoin('ss_product', 'ss_tryout_product.product_id', '=', 'ss_product.id')
+            ->where('ss_tryout_product.begin_date', '<=', time())
+            ->where('ss_tryout_product.status', 1)
             ->select('ss_tryout_product.*', 'ss_product.name', 'ss_product.description','ss_product.image')
             ->get()
             ->toArray();

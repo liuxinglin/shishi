@@ -13,34 +13,34 @@ use App\Repositories\CommentRepositoryEloquent;
 use App\Repositories\EnrolmentRepositoryEloquent;
 use App\Repositories\TryoutProductRepositoryEloquent;
 use Illuminate\Http\Request;
+use function Psy\bin;
 
 class TryoutProductService
 {
     protected $repository;
-    public function __construct(
-        TryoutProductRepositoryEloquent $repository,
-        EnrolmentRepositoryEloquent $enrolment,
-        CommentRepositoryEloquent $comment
-    )
+    public function __construct(TryoutProductRepositoryEloquent $repository)
     {
         $this->repository = $repository;
-        $this->enrolment = $enrolment;
-        $this->comment = $comment;
+
     }
 
-    public function getTryoutProductList(Request $request)
+
+    public function getTryoutProductList($where)
     {
         return $this->repository->getList();
     }
 
-    public function getDetails(Request $request)
+    public function getDetails($id)
     {
-        $id = $request->get('id', '');
-        $result = $this->repository->getDetails($id);
+        $result = $this->repository->getDetails((int)$id);
         //查询报名信息
-        $result['enrolments'] = $this->enrolment->getList(['tryout_id' => $result['id']], true);
+        app()->bind('EnrolmentService', \App\Services\EnrolmentService::class);
+        $model = app()->make('EnrolmentService');
+        $result['enrolments'] = $model->getList(['tryout_id' => $result['id']], true);
         //查询评论信息
-        $result['comments'] = $this->comment->getList(['product_id' => $result['product_id']], true);
+        app()->bind('CommentService', \App\Services\CommentService::class);
+        $model = app()->make('CommentService');
+        $result['comments'] = $model->getList(['product_id' => $result['product_id']], true);
         return $result;
     }
 }

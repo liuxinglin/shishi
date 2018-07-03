@@ -12,33 +12,53 @@ namespace App\Services;
 use App\Repositories\OrderRepositoryEloquent;
 use App\Repositories\MemberRepositoryEloquent;
 use Illuminate\Http\Request;
+use DB;
 
 class OrderService
 {
     protected $repository;
-    protected $member;
 
-    public function __construct(OrderRepositoryEloquent $order, MemberRepositoryEloquent $member)
+    public function __construct(OrderRepositoryEloquent $order)
     {
         $this->repository = $order;
-        $this->member = $member;
     }
 
     public function add(Request $request)
     {
         $data = $request->except('_token');
-        $member = $this->member->getDetails(['id' => $data['member_id']]);
+        //获取报会员详细信息
+        app()->bind('MemberService', \App\Services\MemberService::class);
+        $model = app()->make('MemberService');
+        $memberInfo = $model->getDetails($data['member_id']);
+        //订单信息
         $orderInfo = [
             'order_id' => $data['member_id'].time(),
             'member_id' => $data['member_id'],
             'member_group_id' => 1,
-            'fullname' => $member['nickname'],
+            'fullname' => $memberInfo['nickname'],
             'total' => $data['total'],
-            'telphone' => $member['phone'],
+            'telphone' => $memberInfo['phone'],
             'member_address_id' => $data['member_address_id'],
             'order_status' => 0,
         ];
-        $result = $this->repository->create($orderInfo);
-        return $result;
+        //订单商品信息
+        $orderProductList = [
+            [
+                'order_id' => $orderInfo['order_id'],
+                'product_id' => 1,
+                'name' => '测试商品',
+                'quantity' => 1,
+                'price' => 1.00,
+                'total' => 1.00
+            ]
+        ];
+        $result = DB::transaction(function () use ($orderProductList, $orderInfo) {
+            $this->repository->create($orderInfo);
+            app()->bind('OrderProductService', \App\Services\OrderProductService::class);
+            $model = app()->make('OrderProductService');
+            $model->insertAll($orderProductList);
+        });
+
+        return empty($result) ? $result : $orderInfo['order_id'];
     }
 }

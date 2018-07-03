@@ -27,8 +27,8 @@ class CommentService
         return $result;
     }
 
-    public function getList(Request $request)
+    public function getList($where, $total = true)
     {
-
+        return $this->repository->getList($where, $total);
     }
 }

@@ -64,7 +64,8 @@ class EnrolmentController extends Controller
      */
     public function show(Request $request)
     {
-        $data = $this->service->getDetails($request);
+        $where = $request->except('_token');
+        $data = $this->service->getDetails($where);
         return view('home.enrolment.show', compact('data'));
     }
 

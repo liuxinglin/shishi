@@ -19,7 +19,7 @@ class ProductService
         $this->comment = $comment;
     }
 
-    public function getProductList(Request $request)
+    public function getProductList($where)
     {
         return $this->repository->all();
     }

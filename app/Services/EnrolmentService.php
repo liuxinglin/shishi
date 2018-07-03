@@ -21,25 +21,24 @@ class EnrolmentService
     protected $tryout;
     protected $member;
     protected $vote;
-    public function __construct(
-        EnrolmentRepositoryEloquent $enrolment,
-        TryoutProductRepositoryEloquent $tryout,
-        MemberRepositoryEloquent $member,
-        VoteRepositoryEloquent $vote
-    )
+    public function __construct(EnrolmentRepositoryEloquent $enrolment)
     {
         $this->repository = $enrolment;
-        $this->tryout = $tryout;
-        $this->member = $member;
-        $this->vote = $vote;
     }
 
     public function add(Request $request)
     {
         $memberId = $request->post('member_id', '');
         $tryoutId = $request->post('tryout_id', '');
-        $memberInfo = $this->member->getDetails(['id' => $memberId]);
-        $tryoutInfo = $this->tryout->getDetails($tryoutId);
+        //获取报名人详细信息
+        app()->bind('MemberService', \App\Services\MemberService::class);
+        $model = app()->make('MemberService');
+        $memberInfo = $model->getDetails($memberId);
+        //获取试用信息
+        app()->bind('TryoutProductService', \App\Services\TryoutProductService::class);
+        $model = app()->make('TryoutProductService');
+        $tryoutInfo = $model->getDetails($tryoutId);
+
         if (empty($memberInfo['phone'])) {
             throw  new \Exception('请绑定手机号码！', 2);
         }
@@ -70,26 +69,36 @@ class EnrolmentService
         return $result;
     }
 
-    public function getDetails(Request $request)
+    public function getList($where, $total = true)
     {
-        $where = [];
-        $id = $request->get('id', '');
-        $memberId = $request->get('member_id', '');
-        $tryoutId = $request->get('tryout_id', '');
-        if (!empty($id)) {
-            $where['id'] = $id;
-        }
-        if (!empty($memberId)) {
-            $where['member_id'] = $memberId;
-        }
-        if (!empty($tryoutId)) {
-            $where['tryout_id'] = $tryoutId;
-        }
+        return $this->repository->getList($where , $total);
+    }
+
+    public function getDetails($where)
+    {
         $result = $this->repository->getDetails($where);
-        $result['member'] = $this->member->getDetails(['id' => $result['member_id']]);
-        $result['tryout'] = $this->tryout->getDetails($result['tryout_id']);
-        $result['vote']['list'] = $this->vote->getVoteList(['enlt_id' => $result['id']]);
+        //获取报名人相信信息
+        app()->bind('MemberService', \App\Services\MemberService::class);
+        $model = app()->make('MemberService');
+        $result['member'] = $model->getDetails($result['member_id']);
+
+        //获取试用产品信息
+        app()->bind('TryoutProductService', \App\Services\TryoutProductService::class);
+        $model = app()->make('TryoutProductService');
+        $result['tryout'] = $model->getDetails($result['product_id']);
+
+        //获取投票列表信息
+        app()->bind('VoteService', \App\Services\VoteService::class);
+        $model = app()->make('VoteService');
+        $result['vote']['list'] = $model->getVoteList(['enlt_id' => $result['id']]);
+
+        //获取最大得票数
         $result['vote']['maxVoteNum'] = $this->repository->getMaxVotes(['tryout_id' => $result['tryout_id']]);
         return $result;
+    }
+
+    public function incVoteNum($where, $num = 1)
+    {
+        return $this->repository->increment($where, 'votes_num', $num);
     }
 }

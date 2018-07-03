@@ -29,9 +29,9 @@ class MemberAddressService
     public function add(Request $request)
     {
         $data = $request->except('_token');
-        $data['province'] = '';
-        $data['city'] = '';
-        $data['county'] = '';
+        $data['province'] = '广东省';
+        $data['city'] = '深圳市';
+        $data['county'] = '南山区';
         $data['type'] = 1;
         $result = $this->repository->create($data);
         if(!empty($result)) {

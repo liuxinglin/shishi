@@ -21,8 +21,8 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $this->service->getProductList($request);
-        //var_dump($data);
+        $where = $request->except('_token');
+        $data = $this->service->getProductList($where);
         return view('home.product.index', compact('data'));
     }
 
