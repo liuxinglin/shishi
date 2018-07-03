@@ -25,7 +25,7 @@
                         </div>
                         <div class="weui-media-box__bd">
                             @if($data['end_date'] < time())
-                                <p><<span>报名已结束</span></p>
+                                <p><span>报名已结束</span></p>
                             @else
                                 <p class="countdown">剩余时间   <span id="time"></span></p>
                             @endif
