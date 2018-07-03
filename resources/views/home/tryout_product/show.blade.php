@@ -24,7 +24,11 @@
                             <img src="/static/home/images/img_goodstab2.png">
                         </div>
                         <div class="weui-media-box__bd">
-                            <p class="countdown">剩余时间   <span id="time"></span></p>
+                            @if($data['end_date'] < time())
+                                <p><<span>报名已结束</span>/p>
+                            @else
+                                <p class="countdown">剩余时间   <span id="time"></span></p>
+                            @endif
                         </div>
                     </div>
                     <div class="product-promise">
@@ -124,9 +128,6 @@
     <script type="application/javascript">
         $('.countdown').downCount({
             date: '{{ date('Y/m/d H:i:s', $data['end_date']) }}'
-        }, function (){
-            $('.countdown').text('');
-            $('#time').text('报名已结束！');
         });
 
         $('.signup').click(function () {
