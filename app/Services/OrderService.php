@@ -23,6 +23,12 @@ class OrderService
         $this->repository = $order;
     }
 
+    public function getOrderList($where, $page, $limit)
+    {
+        $result = $this->repository->getOrderList($where, $page, $limit);
+        return $result;
+    }
+
     public function add(Request $request)
     {
         $data = $request->except('_token');

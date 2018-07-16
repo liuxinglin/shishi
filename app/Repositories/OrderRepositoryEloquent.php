@@ -34,5 +34,9 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
+    public function getOrderList($where, $page = 0, $limit = 15)
+    {
+        return $this->model->with('product')->where($where)->get();
+    }
 }

@@ -20,6 +20,11 @@ class OrderController extends Controller
         $this->formatter = $formatter;
     }
 
+    public function index(Request $request)
+    {
+
+    }
+
     public function create(Request $request)
     {
         $id = $request->get('id');

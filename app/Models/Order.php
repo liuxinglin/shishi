@@ -39,4 +39,9 @@ class Order extends Model implements Transformable
         return strtotime(parent::fromDateTime($value));
     }
 
+    public function product()
+    {
+        return $this->hasMany('App\Models\OrderProduct', 'order_id', 'order_id');
+    }
+
 }
