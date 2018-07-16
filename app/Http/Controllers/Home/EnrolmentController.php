@@ -73,6 +73,7 @@ class EnrolmentController extends Controller
             'onMenuShareAppMessage',
             'onMenuShareQQ',
             'onMenuShareWeibo'], $debug = true, $beta = false, $json = true);
+        var_dump($signPackage);
         return view('home.enrolment.show', compact('data', 'signPackage'));
     }
 
