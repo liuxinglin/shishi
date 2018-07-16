@@ -24,6 +24,8 @@ class Auth
         if(empty($member)) {
             if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
                 $config = config('wechat.official_account');
+                var_dump($config);
+                exit();
                 $scopes = array_get($config, 'oauth.scopes', ['snsapi_base']);
                 $app = Factory::officialAccount($config);
                 $oauth = $app->oauth;
