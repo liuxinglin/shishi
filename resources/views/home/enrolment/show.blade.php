@@ -78,6 +78,36 @@
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
         wx.config({{ $signPackage }});
+        wx.ready(function(){
+            //朋友圈
+            wx.onMenuShareTimeline({
+                title: '测试',
+                link: 'http://www.baidu.com',
+                imgUrl: '',
+                trigger: function (res) {
+                },
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                    //self.location= link;
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+            wx.onMenuShareAppMessage({
+                title: '测试',
+                link: 'http://www.baidu.com',
+                imgUrl: '',
+                desc: '测试',
+                type: '', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function () {
+                    //self.location= link;
+                },
+                cancel: function () {
+                }
+            });
+        });
     </script>
     <script type="application/javascript">
         $('.vote').click(function () {
