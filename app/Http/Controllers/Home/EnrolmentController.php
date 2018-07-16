@@ -51,7 +51,7 @@ class EnrolmentController extends Controller
             if (empty($result)) {
                 return response()->json($this->formatter->formatFail(0, [], '报名失败'));
             }
-            return response()->json($this->formatter->format([], '报名成功'));
+            return response()->json($this->formatter->format($result, '报名成功'));
         } catch (\Exception $e) {
             return response()->json($this->formatter->formatException($e));
         }
