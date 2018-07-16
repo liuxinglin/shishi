@@ -22,7 +22,7 @@ class Auth
         $member = session($sessionKey);
 
         //未登录则跳转到登录页面
-        if(empty($member)) {
+        if(empty($member) || empty($member['id'])) {
             if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
                 try {
                     $config = config('wechat.official_account.default');
