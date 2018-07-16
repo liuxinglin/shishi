@@ -24,9 +24,8 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $member = session('member');
-        //$member = $this->service->getDetails($id);
-        var_dump($member);
+        $id = session('member.id');
+        $member = $this->service->getDetails($id);
         return view('home.member.index', compact('member'));
     }
 
