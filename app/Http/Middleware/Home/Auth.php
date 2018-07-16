@@ -37,6 +37,7 @@ class Auth
 //
 //                    return redirect()->to($this->getTargetUrl($request));
                     var_dump($user);
+                    exit();
                 }
 
                 session()->forget($sessionKey);
