@@ -29,7 +29,7 @@ class Auth
                 $oauth = $app->oauth;
 
                 if ($request->has('code')) {
-                    $user = $oauth->user();
+                    $user = $oauth->user()->toArray();
 //                    session([$sessionKey => $officialAccount->oauth->user() ?? []]);
 //                    $isNewSession = true;
 //

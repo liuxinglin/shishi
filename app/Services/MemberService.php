@@ -92,6 +92,11 @@ class MemberService
         return $result;
     }
 
+    public function loginBySns($user)
+    {
+
+    }
+
     public function getDetails($id)
     {
         $result = $this->repository->getDetails(['id' => $id]);
