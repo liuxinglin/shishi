@@ -77,16 +77,19 @@
     <link rel="stylesheet" href="/static/home/css/layer.css"/>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
+        var title = '好物免费拿';
+        var link = 'http://www.52mhf.com/enrolments/details?id={{ $data['tryout_id'] }}';
+        var imgUrl = '';
         wx.config(<?php echo $app->jssdk->buildConfig(['onMenuShareTimeline',
             'onMenuShareAppMessage',
             'onMenuShareQQ',
-            'onMenuShareWeibo'], $debug = true, $beta = false, $json = true) ?>);
+            'onMenuShareWeibo'], $debug = false, $beta = false, $json = true) ?>);
         wx.ready(function(){
             //朋友圈
             wx.onMenuShareTimeline({
-                title: '测试',
-                link: 'http://www.baidu.com',
-                imgUrl: '',
+                title: title,
+                link: link,
+                imgUrl: imgUrl,
                 trigger: function (res) {
                 },
                 success: function () {
@@ -98,9 +101,9 @@
                 }
             });
             wx.onMenuShareAppMessage({
-                title: '测试',
-                link: 'http://www.baidu.com',
-                imgUrl: '',
+                title: title,
+                link: link,
+                imgUrl: imgUrl,
                 desc: '测试',
                 type: '', // 分享类型,music、video或link，不填默认为link
                 dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
