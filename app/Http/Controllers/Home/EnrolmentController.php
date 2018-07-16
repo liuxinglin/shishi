@@ -65,7 +65,19 @@ class EnrolmentController extends Controller
      */
     public function show(Request $request)
     {
-        $where = $request->except('_token');
+        $data = $request->all();
+        $where = [];
+        if (isset($data['id'])) {
+            $where['id'] = $data['id'];
+        }
+
+        if (isset($data['member_id'])) {
+            $where['member_id'] = $data['member_id'];
+        }
+
+        if (isset($data['tryout_id'])) {
+            $where['tryout_id'] = $data['tryout_id'];
+        }
         $data = $this->service->getDetails($where);
         $config = config('wechat.official_account.default');
         $app = Factory::officialAccount($config);
