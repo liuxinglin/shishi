@@ -77,7 +77,10 @@
     <link rel="stylesheet" href="/static/home/css/layer.css"/>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
-        wx.config({{ $signPackage }});
+        wx.config(<?php echo $app->jssdk->buildConfig(['onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo'], $debug = true, $beta = false, $json = true) ?>);
         wx.ready(function(){
             //朋友圈
             wx.onMenuShareTimeline({

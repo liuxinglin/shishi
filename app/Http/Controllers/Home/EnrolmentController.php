@@ -69,12 +69,7 @@ class EnrolmentController extends Controller
         $data = $this->service->getDetails($where);
         $config = config('wechat.official_account.default');
         $app = Factory::officialAccount($config);
-        $signPackage = $app->jssdk->buildConfig(['onMenuShareTimeline',
-            'onMenuShareAppMessage',
-            'onMenuShareQQ',
-            'onMenuShareWeibo'], $debug = true, $beta = false, $json = true);
-        var_dump($signPackage);
-        return view('home.enrolment.show', compact('data', 'signPackage'));
+        return view('home.enrolment.show', compact('data', 'app'));
     }
 
     /**
