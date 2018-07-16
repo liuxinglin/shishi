@@ -24,30 +24,33 @@ class Auth
         //未登录则跳转到登录页面
         if(empty($member)) {
             if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
-                $config = config('wechat.official_account.default');
-                $scopes = array_get($config, 'oauth.scopes', ['snsapi_base']);
-                $app = Factory::officialAccount($config);
-                $oauth = $app->oauth;
+                try {
+                    $config = config('wechat.official_account.default');
+                    $scopes = array_get($config, 'oauth.scopes', ['snsapi_base']);
+                    $app = Factory::officialAccount($config);
+                    $oauth = $app->oauth;
 
-                if ($request->has('code')) {
-                    $user = $oauth->user()->toArray();
-                    $memberService = app()->make(MemberService::class);
-                    $snsUserInfo = [
-                        'openid' => $user['id'],
-                        'unionid' => $user['id'],
-                        'nickname' => $user['nickname'],
-                        'sex' => $user['original']['sex'],
-                        'headimgurl' => $user['avatar'],
-                        'platform' => 1
-                    ];
-                    $memberService->loginBySns($snsUserInfo);
-                    return redirect()->to($this->getTargetUrl($request));
+                    if ($request->has('code')) {
+                        $user = $oauth->user()->toArray();
+                        $memberService = app()->make(MemberService::class);
+                        $snsUserInfo = [
+                            'openid' => $user['id'],
+                            'unionid' => $user['id'],
+                            'nickname' => $user['nickname'],
+                            'sex' => $user['original']['sex'],
+                            'headimgurl' => $user['avatar'],
+                            'platform' => 1
+                        ];
+                        $memberService->loginBySns($snsUserInfo);
+                        return redirect()->to($this->getTargetUrl($request));
+                    }
+
+                    session()->forget($sessionKey);
+
+                    return $oauth->scopes($scopes)->redirect($request->fullUrl());
+                } catch (\Exception $e) {
+                    var_dump($e);
                 }
-
-                session()->forget($sessionKey);
-
-                return $oauth->scopes($scopes)->redirect($request->fullUrl());
-
             } else {
                 return redirect(route('auth.index'));
             }
