@@ -22,7 +22,7 @@ class MemberAddressService
 
     public function getList($memberId)
     {
-        $result = $this->repository->all()->toArray();
+        $result = $this->repository->findWhere(['member_id' => $memberId])->toArray();
         return $result;
     }
 
