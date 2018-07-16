@@ -233,10 +233,10 @@
                     $.ajax({
                         type: 'POST',
                         url: url,
-                        data: {'member_id': member_id, 'phone': phone, 'varify_code': 'varify_code', '_token': '{{ csrf_token() }}'},
+                        data: {'member_id': member_id, 'phone': phone, 'varify_code': varify_code, '_token': '{{ csrf_token() }}'},
                         success: function (rst) {
                             console.log(rst);
-                            if(rst.code != 0) {
+                            if(rst.status == false) {
                                 layer.open({
                                     content: rst.msg
                                     ,skin: 'msg'
