@@ -55,7 +55,8 @@ class ProductController extends Controller
      */
     public function show(Request $request)
     {
-        $data = $this->service->getDetails($request);
+        $id = $request->input('id');
+        $data = $this->service->getDetails($id);
         return view('home.product.show', compact('data'));
     }
 
