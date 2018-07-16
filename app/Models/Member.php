@@ -29,6 +29,7 @@ class Member extends Model implements Transformable
         'email',
         'phone',
         'realname',
+        'sex',
         'status',
     ];
 

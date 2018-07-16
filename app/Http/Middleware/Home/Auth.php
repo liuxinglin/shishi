@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware\Home;
 
+use App\Services\MemberService;
 use Closure;
 use EasyWeChat\Factory;
 use URL, Route;
@@ -30,14 +31,17 @@ class Auth
 
                 if ($request->has('code')) {
                     $user = $oauth->user()->toArray();
-//                    session([$sessionKey => $officialAccount->oauth->user() ?? []]);
-//                    $isNewSession = true;
-//
-//                    Event::fire(new WeChatUserAuthorized(session($sessionKey), $isNewSession, $account));
-//
-//                    return redirect()->to($this->getTargetUrl($request));
-                    var_dump($user);
-                    exit();
+                    $memberService = app()->make(MemberService::class);
+                    $snsUserInfo = [
+                        'openid' => $user['id'],
+                        'unionid' => $user['id'],
+                        'nickname' => $user['nickname'],
+                        'sex' => $user['original']['sex'],
+                        'headimgurl' => $user['avatar'],
+                        'platform' => 1
+                    ];
+                    $memberService->loginBySns($snsUserInfo);
+                    return redirect()->to($this->getTargetUrl($request));
                 }
 
                 session()->forget($sessionKey);

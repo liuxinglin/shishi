@@ -94,7 +94,35 @@ class MemberService
 
     public function loginBySns($user)
     {
-
+        $memberSnsService = app()->make(MemberSnsService::class);
+        $memberSnsInfo = $memberSnsService->getMemberSnsDetails(['unionid' => $user['unionid'], 'platform' => $user['platform']]);
+        if (empty($memberSnsInfo)) {
+            $memberInfo = [
+                'username' => $user['unionid'],
+                'password' => md5('123456a'),
+                'nickname' => $user['nickname'],
+                'sex' => $user['sex'],
+                'headimgurl' => $user['headimgurl'],
+                'status' => 1
+            ];
+            $result = $this->repository->create($memberInfo);
+            if (empty($result)) {
+                throw new \Exception('新增会员失败');
+            }
+            $user['member_id'] = $result['id'];
+            $result1 = $memberSnsService->createMemberSns($user);
+            if (empty($result1)) {
+                throw new \Exception('新增会员第三方登录信息失败');
+            }
+        }
+        $memberInfo = $this->repository->getDetails(['id' => $memberSnsInfo['member_id']]);
+        session([
+            'member' => [
+                'id' => $memberInfo['id'],
+                'nickname' => $memberInfo['nickname'],
+                'headimgurl' => $memberInfo['headimgurl']
+            ]
+        ]);
     }
 
     public function getDetails($id)

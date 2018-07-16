@@ -34,5 +34,13 @@ class MemberSnsRepositoryEloquent extends BaseRepository implements MemberSnsRep
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
+    public function getMemberSnsDetails($where)
+    {
+        $result = $this->model->where($where)->first();
+        if (!empty($result)) {
+            $result = $result->toArray();
+        }
+        return $result;
+    }
 }
