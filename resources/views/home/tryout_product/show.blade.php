@@ -228,7 +228,7 @@
                 yes: function(index){
                     var phone = $("input[ name='phone']").val();
                     var varify_code = $("input[ name='verify_code']").val();
-                    var member_id = 1;
+                    var member_id = '{{ session('member.id') }}';
                     var url = '/members/bindPhone';
                     $.ajax({
                         type: 'POST',
