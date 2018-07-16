@@ -23,9 +23,7 @@ class Auth
         //未登录则跳转到登录页面
         if(empty($member)) {
             if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
-                $config = config('wechat.official_account');
-                var_dump($config);
-                exit();
+                $config = config('wechat.official_account.default');
                 $scopes = array_get($config, 'oauth.scopes', ['snsapi_base']);
                 $app = Factory::officialAccount($config);
                 $oauth = $app->oauth;
