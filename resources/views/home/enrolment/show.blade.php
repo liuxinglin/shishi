@@ -75,6 +75,10 @@
 @section('my-js')
     <script type="application/javascript" src="/static/layer_mobile/layer.js"></script>
     <link rel="stylesheet" href="/static/home/css/layer.css"/>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+        wx.config({{ $signPackage }});
+    </script>
     <script type="application/javascript">
         $('.vote').click(function () {
             var member_id = '{{ session('member.id') }}';

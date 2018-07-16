@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Formatters\AppFormatter;
 use App\Services\EnrolmentService;
+use EasyWeChat\Factory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -66,7 +67,13 @@ class EnrolmentController extends Controller
     {
         $where = $request->except('_token');
         $data = $this->service->getDetails($where);
-        return view('home.enrolment.show', compact('data'));
+        $config = config('wechat.official_account.default');
+        $app = Factory::officialAccount($config);
+        $signPackage = $app->jssdk->buildConfig(['onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo'], $debug = true, $beta = false, $json = true);
+        return view('home.enrolment.show', compact('data', 'signPackage'));
     }
 
     /**
