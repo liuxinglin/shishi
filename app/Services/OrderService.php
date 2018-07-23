@@ -23,7 +23,7 @@ class OrderService
         $this->repository = $order;
     }
 
-    public function getOrderList($where, $page, $limit)
+    public function getOrderList($where, $page=0, $limit=15)
     {
         $result = $this->repository->getOrderList($where, $page, $limit);
         return $result;
@@ -55,16 +55,16 @@ class OrderService
                 'name' => '测试商品',
                 'quantity' => 1,
                 'price' => 1.00,
+                '' => '/static/home/images/product.png',
                 'total' => 1.00
             ]
         ];
-        $result = DB::transaction(function () use ($orderProductList, $orderInfo) {
+        DB::transaction(function () use ($orderProductList, $orderInfo) {
             $this->repository->create($orderInfo);
             app()->bind('OrderProductService', \App\Services\OrderProductService::class);
             $model = app()->make('OrderProductService');
             $model->insertAll($orderProductList);
         });
-
-        return empty($result) ? $result : $orderInfo['order_id'];
+        return $orderInfo['order_id'];
     }
 }

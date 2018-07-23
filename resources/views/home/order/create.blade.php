@@ -6,7 +6,7 @@
 
                 <div class="weui-cell" style="    background: url(/static/home/images/img_adressBG.png) no-repeat;background-position:bottom;background-size:100%;border: none;">
                     @if(empty($memberAddress))
-                        <div class="weui-cell__hd"><img src="/static/home/images/btn_addadress.png" style="width: 55%"></div>
+                        <a class="weui-cell__hd" href="/address/create"><img src="/static/home/images/btn_addadress.png" style="width: 55%"></a>
                         <div class="weui-cell__bd">
                             <p>新建收货地址</p>
                         </div>

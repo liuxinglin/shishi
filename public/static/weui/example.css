@@ -571,6 +571,10 @@ img {
     padding: 2vw 3vw;
 }
 
+.order {
+    overflow:hidden;
+}
+
 .order-panel .weui-media-box_appmsg {
     border-top: 1px solid #E5E5E5;
     padding: 3vw 3vw;
@@ -585,6 +589,64 @@ img {
 .order-panel .weui-media-box__thumb {
     width: 40%;
     border-radius: 0;
+}
+
+.order .weui-navbar__item {
+    margin: 0 3%;
+    padding: 3vw 0;
+    font-size: 4.5vw;
+    line-height: 5vw;
+}
+
+.order .weui-tab {
+    overflow: inherit;
+    margin-top: 20vw;
+    height: auto;
+}
+
+.order-list .weui-media-box__thumb {
+    border-radius: 8%;
+}
+
+.order-list .weui-panel {
+    background-color: #f8f8f8;
+}
+.order-list .weui-panel:after {
+    border-bottom: inherit;
+}
+
+.order-list .weui-media-box_appmsg {
+    background-color: #FFFFFF;
+}
+
+.order-list .weui-media-box {
+    padding: 3vw;
+    position: relative;
+    margin: 0 0 3vw;
+}
+
+.order-list .weui-media-box_appmsg .weui-media-box__hd {
+    margin-right: .8em;
+    width: 30vw;
+    height: 30vw;
+    line-height: 30vw;
+    text-align: center;
+}
+
+.order-list .weui-media-box__bd .weui-media-box__desc {
+    font-size: 4vw;
+    line-height: 7vw;
+}
+
+.order-list .weui-media-box__bd button {
+    border: 1px solid red;
+    background: #FFFFFF;
+    width: 23vw;
+    height: 7vw;
+    border-radius: 3px;
+    float: right;
+    color: red;
+    font-size: 3.5vw;
 }
 
 .member .tool {
@@ -648,6 +710,7 @@ img {
     font-size: 5vw;
     margin-bottom: 5vw
 }
+
 
 
 

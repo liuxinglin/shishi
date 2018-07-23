@@ -22,7 +22,11 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
-
+        $where = [
+            'member_id' => session('member.id')
+        ];
+        $data = $this->service->getOrderList($where);
+        return view('home.order.index', compact('data'));
     }
 
     public function create(Request $request)
