@@ -22,7 +22,10 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
-
+        $where = [];
+        $page = 1;
+        $limit = 15;
+        $orderList = $this->service->getOrderList($where, $page, $limit);
     }
 
     public function create(Request $request)

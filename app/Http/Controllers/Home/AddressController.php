@@ -17,6 +17,13 @@ class AddressController extends Controller
         $this->formatter = $formatter;
     }
 
+    public function index()
+    {
+        $memberId = session('member.id');
+        $addressList = $this->service->getList($memberId);
+        return view('home.address.index', compact('addressList'));
+    }
+
     public function create()
     {
         return view('home.address.create');

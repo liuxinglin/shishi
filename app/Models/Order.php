@@ -28,7 +28,8 @@ class Order extends Model implements Transformable
         'total',
         'telphone',
         'member_address_id',
-        'order_status'
+        'order_status',
+        'is_comment'
     ];
     /**
      * 时间转换为时间戳存储
