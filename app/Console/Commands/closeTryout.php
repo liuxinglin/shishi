@@ -40,6 +40,8 @@ class closeTryout extends Command
         //查询当前结束的试用活动
         app()->bind('TryoutProductService', \App\Services\TryoutProductService::class);
         $tryoutModel = app()->make('TryoutProductService');
+        app()->bind('EnrolmentService', '\App\Services\EnromentService::class');
+        $enrolmentModel = app()->make('EnrolmentService');
         $where = [
             'vote_end_date' => time()
         ];

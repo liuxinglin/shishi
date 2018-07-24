@@ -101,4 +101,9 @@ class EnrolmentService
     {
         return $this->repository->increment($where, 'votes_num', $num);
     }
+
+    public function getRank($where, $rankNum=10)
+    {
+        return $this->repository->getList();
+    }
 }
