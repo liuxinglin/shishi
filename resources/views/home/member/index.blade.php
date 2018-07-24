@@ -10,26 +10,26 @@
         </div>
 
         <div class="weui-panel weui-panel_access order-panel">
-            <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+            <a href="/orders/index" class="weui-cell weui-cell_access weui-cell_link">
                 <div class="weui-cell__bd">我的订单</div>
                 <span class="weui-cell__ft">查看更多</span>
             </a>
             <div class="weui-panel__bd">
                 <div class="weui-media-box weui-media-box_appmsg">
-                    <div class="weui-media-box__bd">
+                    <a class="weui-media-box__bd" href="/orders/index?order_status=0">
                         <img class="weui-media-box__thumb" src="/static/home/images/btn_info_notpay.png" alt="">
                         <p>待付款</p>
-                    </div>
+                    </a>
                     <div class="weui-media-box__bd"></div>
-                    <div class="weui-media-box__bd">
+                    <a class="weui-media-box__bd"  href="/orders/index?order_status=2">
                         <img class="weui-media-box__thumb" src="/static/home/images/btn_info_notget.png" alt="">
                         <p>待收货</p>
-                    </div>
+                    </a>
                     <div class="weui-media-box__bd"></div>
-                    <div class="weui-media-box__bd">
+                    <a class="weui-media-box__bd"  href="/orders/index?comment_status=0">
                         <img class="weui-media-box__thumb" src="/static/home/images/btn_info_nojudge.png" alt="">
                         <p>待评价</p>
-                    </div>
+                    </a>
                 </div>
                 <div class="weui-media-box weui-media-box_appmsg">
                     <div class="weui-media-box__bd">

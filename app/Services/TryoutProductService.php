@@ -27,7 +27,7 @@ class TryoutProductService
 
     public function getTryoutProductList($where)
     {
-        return $this->repository->getList();
+        return $this->repository->getList($where);
     }
 
     public function getDetails($id)

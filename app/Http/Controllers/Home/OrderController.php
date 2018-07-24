@@ -22,10 +22,13 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
-        $where = [];
+        $where = [
+            'member_id' => session('member.id')
+        ];
         $page = 1;
         $limit = 15;
         $orderList = $this->service->getOrderList($where, $page, $limit);
+        return view('home.order.index', compact('orderList'));
     }
 
     public function create(Request $request)

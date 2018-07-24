@@ -37,6 +37,6 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
 
     public function getOrderList($where, $page = 0, $limit = 15)
     {
-        return $this->model->with('product')->where($where)->get();
+        return $this->model->with('product')->where($where)->get()->toArray();
     }
 }

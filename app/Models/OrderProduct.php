@@ -25,6 +25,7 @@ class OrderProduct extends Model implements Transformable
         'order_id',
         'product_id',
         'name',
+        'preview',
         'quantity',
         'price',
         'total'

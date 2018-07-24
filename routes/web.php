@@ -52,6 +52,7 @@ Route::group(['namespace' => 'Home'], function () {
         Route::post('/comments/add', 'CommentController@store');
         Route::get('/address/create', 'AddressController@create');
         Route::post('/address/add', 'AddressController@store');
+        Route::get('/orders/index', 'OrderController@index');
         Route::get('/orders/create', 'OrderController@create');
         Route::post('/orders/add', 'OrderController@store');
     });
