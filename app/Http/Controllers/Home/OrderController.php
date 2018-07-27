@@ -44,7 +44,8 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         try {
-            $result = $this->service->add($request);
+            $data = $request->except('_token');
+            $result = $this->service->addOrder($data);
             if (empty($result)) {
                 return response()->json($this->formatter->formatFail(0, [], '下单失败'));
             }

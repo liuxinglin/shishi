@@ -26,10 +26,10 @@ class EnrolmentService
         $this->repository = $enrolment;
     }
 
-    public function add(Request $request)
+    public function add($data)
     {
-        $memberId = $request->post('member_id', '');
-        $tryoutId = $request->post('tryout_id', '');
+        $memberId = $data['member_id'];
+        $tryoutId = $data['tryout_id'];
         //获取报名人详细信息
         app()->bind('MemberService', \App\Services\MemberService::class);
         $model = app()->make('MemberService');
@@ -55,23 +55,24 @@ class EnrolmentService
         if (!empty($enrolmentInfo)) {
             throw  new \Exception('您已经参与此次活动！', 1);
         }
-        $data = [
+        $enrolmentInfo = [
             'member_id' => $memberId,
+            'member_address_id' => $data['member_address_id'],
             'tryout_id' => $tryoutId,
             'nickname' => $memberInfo['nickname'],
             'phone' => $memberInfo['phone'],
             'product_id' => $tryoutInfo['product_id'],
         ];
-        $result = $this->repository->create($data);
+        $result = $this->repository->create($enrolmentInfo);
         if (!empty($result)) {
             $result = $result->toArray();
         }
         return $result;
     }
 
-    public function getList($where, $total = true)
+    public function getEnrolmentList($where, $page, $limit, $total = true)
     {
-        return $this->repository->getList($where , $total);
+        return $this->repository->getEnrolmentList($where , $page, $limit, $total);
     }
 
     public function getDetails($where)
@@ -100,10 +101,5 @@ class EnrolmentService
     public function incVoteNum($where, $num = 1)
     {
         return $this->repository->increment($where, 'votes_num', $num);
-    }
-
-    public function getRank($where, $rankNum=10)
-    {
-        return $this->repository->getList();
     }
 }

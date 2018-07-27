@@ -23,6 +23,7 @@ class Enrolment extends Model implements Transformable
      */
     protected $fillable = [
         'member_id',
+        'member_address_id',
         'nickname',
         'tryout_id',
         'phone',

@@ -40,10 +40,10 @@ class TryoutProductRepositoryEloquent extends BaseRepository implements TryoutPr
         $result = $this->model->leftJoin('ss_product', 'ss_tryout_product.product_id', '=', 'ss_product.id')
             ->where('ss_tryout_product.begin_date', '<=', time())
             ->where('ss_tryout_product.status', 1);
-        if (isset($where['vote_end_date'])) {
-            $result = $result->where('ss_tryout_product.vote_end_date', $where['vote_end_date']);
+        if (isset($where['between'])) {
+            $result = $result->whereBetween('ss_tryout_product.vote_end_date', $where['between']);
         }
-        $result->select('ss_tryout_product.*', 'ss_product.name', 'ss_product.description','ss_product.image')
+        $result = $result->select('ss_tryout_product.*', 'ss_product.name', 'ss_product.description','ss_product.image')
             ->get()
             ->toArray();
         return $result;

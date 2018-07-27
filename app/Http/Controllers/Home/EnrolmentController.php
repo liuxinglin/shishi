@@ -47,7 +47,8 @@ class EnrolmentController extends Controller
     public function store(Request $request)
     {
         try {
-            $result = $this->service->add($request);
+            $data = $request->except('_token');
+            $result = $this->service->add($data);
             if (empty($result)) {
                 return response()->json($this->formatter->formatFail(0, [], '报名失败'));
             }

@@ -35,10 +35,11 @@ class EnrolmentRepositoryEloquent extends BaseRepository implements EnrolmentRep
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function getList($where, $total = false)
+    public function getEnrolmentList($where, $page = 1, $limit = 10, $total = false)
     {
         $data = [];
-        $data['list'] = $this->model->where($where)->orderBy('votes_num', 'DESC')->get()->toArray();
+        $data['list'] = $this->model->where($where)->skip($page)
+            ->take($limit)->orderBy('votes_num', 'DESC')->get()->toArray();
         if ($total) {
             $data['total'] = $this->model->where($where)->count();
         }
