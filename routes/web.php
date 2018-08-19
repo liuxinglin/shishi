@@ -33,6 +33,7 @@ Route::group(['namespace' => 'Home'], function () {
     Route::get('/auth/index', 'AuthController@index')->name('auth.index');
     Route::post('/auth/register', 'AuthController@register');
     Route::post('/auth/login', 'AuthController@login');
+    Route::any('/payments/notify', 'PaymentController@notify');
     Route::group(['middleware' => 'home.auth'], function () {
         Route::get('/members/index', 'MemberController@index');
         Route::post('/members/bindPhone', 'MemberController@bindPhone');
@@ -61,7 +62,6 @@ Route::group(['namespace' => 'Home'], function () {
         Route::get('/orders/details', 'OrderController@show');
         //我的优惠券
         Route::get('/member/coupons', 'MemberCouponController@index');
-        Route::any('/payments/notify', 'PaymentController@notify');
     });
 });
 
