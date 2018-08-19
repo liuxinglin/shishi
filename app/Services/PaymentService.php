@@ -49,7 +49,7 @@ class PaymentService
         $response = $app->handlePaidNotify(function($message, $fail){
             BLogger::getLogger('pay')->info('支付回调信息：'.json_encode($message));
             // 使用通知里的 "微信支付订单号" 或者 "商户订单号" 去自己的数据库找到订单
-            app()->bind('OrderService', OrderProductService::class);
+            app()->bind('OrderService', OrderService::class);
             $orderModel = app()->make('OrderService');
             $orderInfo = $orderModel->getOrderInfo($message['out_trade_no']);
             if (empty($orderInfo) || ($orderInfo['order_status'] == 1) || ($orderInfo['order_status'] == 3)) {
