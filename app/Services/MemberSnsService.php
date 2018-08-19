@@ -31,4 +31,10 @@ class MemberSnsService
         $result = $this->repository->getMemberSnsDetails($where);
         return $result;
     }
+
+    public function getMemberOpenid($id)
+    {
+        $openid = $this->repository->getOpenid($id);
+        return $openid;
+    }
 }

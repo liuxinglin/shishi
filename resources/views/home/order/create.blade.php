@@ -122,6 +122,7 @@
                             ,skin: 'msg'
                             ,time: 2 //2秒后自动关闭
                         })
+                        window.location.href = '/orders/details?order_id='+rst.data.order_id;
                     }
                 }
             })

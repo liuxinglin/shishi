@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Home;
 
 use App\Formatters\AppFormatter;
 use App\Services\MemberAddressService;
+use App\Services\MemberSnsService;
 use App\Services\OrderService;
+use App\Services\PaymentService;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use EasyWeChat\Factory;
 
 class OrderController extends Controller
 {
@@ -52,9 +55,34 @@ class OrderController extends Controller
             if (empty($result)) {
                 return response()->json($this->formatter->formatFail(0, [], '下单失败'));
             }
-            return response()->json($this->formatter->format([], '下单成功'));
+            return response()->json($this->formatter->format(['order_id' => $result], '下单成功'));
         } catch (\Exception $e) {
             return response()->json($this->formatter->formatException($e));
+        }
+    }
+
+    public function show(Request $request)
+    {
+        try {
+            $id = $request->input('order_id');
+            $orderInfo = $this->service->getOrderInfo($id);
+            $memberSnsModel = app()->make(MemberSnsService::class);
+            $openid = $memberSnsModel->getMemberOpenid($orderInfo['member_id']);
+            $paymentModel = app()->make(PaymentService::class);
+            $preOrderInfo = [
+                'product_name' => $orderInfo['product'][0]['name'],
+                'order_id' => $orderInfo['order_id'],
+                'total' => $orderInfo['total']*100,
+                'openid' => $openid
+            ];
+
+            $preOrder = $paymentModel->createPreOrder($preOrderInfo);
+            if (($preOrder['return_code'] == 'SUCCESS') && ($preOrder['return_msg'] == 'OK')) {
+                $getJsApiParameters = $paymentModel->getJsApiParameters($preOrder['prepay_id']);
+                return view('home.order.show', compact('orderInfo', 'getJsApiParameters'));
+            }
+        } catch (\Exception $e) {
+            BLogger::getLogger('payment')->info('支付信息：'.json_encode($e));
         }
     }
 }

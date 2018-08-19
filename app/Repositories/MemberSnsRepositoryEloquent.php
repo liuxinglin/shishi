@@ -43,4 +43,10 @@ class MemberSnsRepositoryEloquent extends BaseRepository implements MemberSnsRep
         }
         return $result;
     }
+
+    public function getOpenid($member_id)
+    {
+        $openid = $this->model->where('member_id', $member_id)->value('openid');
+        return $openid;
+    }
 }
