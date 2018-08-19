@@ -45,7 +45,9 @@ class OrderService
         app()->bind('MemberAddressService', \App\Services\MemberAddressService::class);
         $addressModel = app()->make('MemberAddressService');
         $address = $addressModel->getAddressInfo(['id' => $data['member_address_id']]);
-
+        app()->bind('ProductService', \App\Services\ProductService::class);
+        $productModel = app()->make('ProductService');
+        $productInfo = $productModel->getDetails($data['product_id']);
         //订单信息
         $orderInfo = [
             'order_type' => 1,
@@ -60,10 +62,6 @@ class OrderService
             'order_status' => 0,
             'is_comment' => 0
         ];
-        app()->bind('ProductService', \App\Services\ProductService::class);
-        $productModel = app()->make('ProductService');
-        $productInfo = $productModel->getDetails($data['product_id']);
-
 
         //订单商品信息
         $orderProductList = [
@@ -71,7 +69,7 @@ class OrderService
                 'order_id' => $orderInfo['order_id'],
                 'product_id' => $data['product_id'],
                 'name' => $productInfo['name'],
-                'quantity' => $data['quantity'],
+                'quantity' => (int)$data['quantity'],
                 'price' => $productInfo['price'],
                 'preview' => $productInfo['image'],
                 'total' => $productInfo['price']

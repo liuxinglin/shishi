@@ -39,7 +39,7 @@
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label class="weui-label">购买数量</label></div>
                     <div class="weui-cell__bd">
-                        <input class="weui-input" type="text" name="quantity" placeholder="请输入购买数量"/>
+                        <input class="weui-input" type="number" name="quantity" placeholder="请输入购买数量"/>
                     </div>
                 </div>
                 <div class="weui-cell weui-cell_select weui-cell_select-after">

@@ -40,23 +40,23 @@
                 <?php echo $getJsApiParameters; ?>,
                 function(res){
                     WeixinJSBridge.log(res.err_msg);
-                    alert(res.err_code);
-//                    if (res.err_code == 'Success') {
-//                        layer.open({
-//                            content: '支付成功'
-//                            ,skin: 'msg'
-//                            ,time: 2 //2秒后自动关闭
-//                            ,type: 1
-//                        });
-//                        window.location.href = '/members/index';
-//                    } else {
-//                        layer.open({
-//                            content: '支付失败'
-//                            ,skin: 'msg'
-//                            ,time: 2 //2秒后自动关闭
-//                            ,type: 1
-//                        });
-//                    }
+//                    alert(res.err_code);
+                    if (res.err_msg == 'get_brand_wcpay_request:ok') {
+                        layer.open({
+                            content: '支付成功'
+                            ,skin: 'msg'
+                            ,time: 2 //2秒后自动关闭
+                            ,type: 1
+                        });
+                        window.location.href = '/members/index';
+                    } else {
+                        layer.open({
+                            content: '支付失败'
+                            ,skin: 'msg'
+                            ,time: 2 //2秒后自动关闭
+                            ,type: 1
+                        });
+                    }
                 }
             );
         }
