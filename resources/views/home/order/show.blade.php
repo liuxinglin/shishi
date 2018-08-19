@@ -40,7 +40,7 @@
                 <?php echo $getJsApiParameters; ?>,
                 function(res){
                     WeixinJSBridge.log(res.err_msg);
-                    alert(res.err_code+res.err_desc+res.err_msg);
+                    alert(res.err_code);
 //                    if (res.err_code == 'Success') {
 //                        layer.open({
 //                            content: '支付成功'
