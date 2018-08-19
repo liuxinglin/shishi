@@ -28,6 +28,7 @@ class MemberAddress extends Model implements Transformable
         'province',
         'city',
         'county',
+        'area',
         'address',
         'is_default',
         'type',

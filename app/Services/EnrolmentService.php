@@ -46,6 +46,7 @@ class EnrolmentService
         if ((time() < $tryoutInfo['begin_date']) || (time() > $tryoutInfo['end_date'])) {
             throw  new \Exception('不在试用活动期！', 3);
         }
+
         //判断试用名额是否已满
         if ($tryoutInfo['quantity'] == $tryoutInfo['signup_num']) {
             throw  new \Exception('试用报名人数已满！', 3);
@@ -55,12 +56,15 @@ class EnrolmentService
         if (!empty($enrolmentInfo)) {
             throw  new \Exception('您已经参与此次活动！', 1);
         }
+
         $enrolmentInfo = [
             'member_id' => $memberId,
-            'member_address_id' => $data['member_address_id'],
             'tryout_id' => $tryoutId,
             'nickname' => $memberInfo['nickname'],
             'phone' => $memberInfo['phone'],
+            'contacts' => $data['contacts'],
+            'area' => $data['area'],
+            'address' => $data['address'],
             'product_id' => $tryoutInfo['product_id'],
         ];
         $result = $this->repository->create($enrolmentInfo);
@@ -101,5 +105,14 @@ class EnrolmentService
     public function incVoteNum($where, $num = 1)
     {
         return $this->repository->increment($where, 'votes_num', $num);
+    }
+
+    public function isEnrolment($tryout_id, $member_id)
+    {
+        $result = $this->repository->getDetails(['member_id' => $member_id, 'tryout_id' => $tryout_id]);
+        if (empty($result)) {
+            return 0;
+        }
+        return $result['id'];
     }
 }

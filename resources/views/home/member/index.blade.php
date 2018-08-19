@@ -67,7 +67,7 @@
                             </div>
                             <span class="weui-cell__ft"></span>
                         </a>
-                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                        <a class="weui-cell weui-cell_access" href="/comments/index?member_id={{ $member['id'] }}">
                             <div class="weui-cell__hd"><img src="/static/home/images/img_pingjia.png" alt=""></div>
                             <div class="weui-cell__bd weui-cell_primary">
                                 <p>我的评价</p>

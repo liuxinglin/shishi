@@ -23,10 +23,12 @@ class Enrolment extends Model implements Transformable
      */
     protected $fillable = [
         'member_id',
-        'member_address_id',
         'nickname',
         'tryout_id',
         'phone',
+        'contacts',
+        'area',
+        'address',
         'product_id',
         'votes_num'
     ];
@@ -38,5 +40,10 @@ class Enrolment extends Model implements Transformable
      */
     public function fromDateTime($value){
         return strtotime(parent::fromDateTime($value));
+    }
+
+    public function member()
+    {
+        return $this->belongsTo('App\Models\Member', 'member_id', 'id');
     }
 }

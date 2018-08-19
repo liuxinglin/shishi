@@ -44,11 +44,14 @@ Route::group(['namespace' => 'Home'], function () {
         Route::get('/tryoutProducts/list', 'TryoutProductController@index');
         Route::resource('products', 'ProductController');
         Route::resource('enrolments', 'EnrolmentController');
+        Route::post('/enrolments/create', 'EnrolmentController@create');
         Route::post('/enrolments/add', 'EnrolmentController@store');
         Route::get('/enrolments/details', 'EnrolmentController@show');
         Route::post('/votes/add', 'VoteController@store');
 
         //评论
+        Route::get('/comments/index', 'CommentController@index');
+        Route::get('/comments/create', 'CommentController@create');
         Route::post('/comments/add', 'CommentController@store');
         Route::get('/address/create', 'AddressController@create');
         Route::post('/address/add', 'AddressController@store');

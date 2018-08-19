@@ -121,4 +121,16 @@ class OrderService
         });
         return $orderInfo['order_id'];
     }
+
+    public function getOrderInfo($id)
+    {
+        $result = $this->repository->getOrderInfo($id);
+        return $result;
+    }
+
+    public function updateCommentStatus($order_id, $status)
+    {
+        $result = $this->repository->updateCommentStatus($order_id, $status);
+        return $result;
+    }
 }

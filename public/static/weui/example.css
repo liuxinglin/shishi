@@ -192,7 +192,7 @@ img {
 .weui-cell_link {
     color: #404040;
     padding: 3vw;
-    font-size: 5vw;
+    font-size: 4.5vw;
 }
 
 .signup-list .weui-panel__bd{
@@ -214,24 +214,70 @@ img {
 }
 
 .weui-media-box__title {
-    font-size: 5vw;
+    font-size: 4.5vw;
 }
 
 .weui-media-box__desc {
-    font-size: 5vw;
+    font-size: 4.5vw;
 }
 
-.signup-list .weui-media-box__desc  span{
+.signup-list .weui-media-box__ft {
+    padding-right: 2vw;
+}
+
+.signup-list .weui-media-box__ft span{
     color: #E02E24;
 }
 
-.commentc{
+.signup-list .weui-media-box__ft button {
+    background: url(/static/home/images/btn_toupiao.png) no-repeat;
+    background-size:100% 100%;
+    border: none;
+    width: 18vw;
+    height: 7vw;
+    color: #FFFFFF;
+    font-size: 4vw;
+}
+
+.tryout .quota {
+    padding: 0px;
+    overflow: hidden;
+    color: #868686;
+    font-size: 4vw;
+}
+
+.tryout .quota .weui-media-box__hd {
+    float: left;
+    width: 50%;
+    text-align: left;
+}
+
+.tryout .quota .weui-media-box__bd {
+    float: right;
+    width: 50%;
+    text-align: left;
+}
+
+.tryout .quota span {
+    color: #E4393C;
+}
+
+.tryout .comment{
     margin-top: 2vw;
 }
 
-.comment .weui-media-box {
+.tryout .comment .weui-media-box {
     border-bottom: 1px solid #E5E5E5;
     padding: 3vw;
+}
+
+.tryout .tryout-content .title {
+    background: url(/static/home/images/img_huodongjieshao.png) no-repeat;
+    background-size:100% 100%;
+    height: 9vw;
+}
+.tryout .tryout-content .weui-media-box {
+    font-size: 4vw;
 }
 
 .comment .user-info {
@@ -304,7 +350,13 @@ img {
     float: left;
 }
 
-.tool-bar .signup {
+.tryout .tool-bar .signup {
+    float: right;
+    width: 100%;
+    background-color: red;
+}
+
+.tool-bar .submit {
     float: right;
     width: 49.5%;
     background-color: red;
@@ -320,7 +372,7 @@ img {
     font-size: 4vw;
     line-height: 6vw;
 }
-.tool-bar .signup .weui-tabbar__label {
+.tool-bar .signup .weui-tabbar__label,.tool-bar .submit .weui-tabbar__label {
     line-height: 13vw;
     font-size: 6vw;
     color: #ffffff;
@@ -610,6 +662,7 @@ img {
 
 .order-list .weui-panel {
     background-color: #f8f8f8;
+    margin-top: 0px;
 }
 .order-list .weui-panel:after {
     border-bottom: inherit;
@@ -638,7 +691,7 @@ img {
     line-height: 7vw;
 }
 
-.order-list .weui-media-box__bd button {
+.order-list .weui-media-box__bd a {
     border: 1px solid red;
     background: #FFFFFF;
     width: 23vw;
@@ -647,6 +700,7 @@ img {
     float: right;
     color: red;
     font-size: 3.5vw;
+    text-align: center;
 }
 
 .member .tool {
@@ -711,6 +765,104 @@ img {
     margin-bottom: 5vw
 }
 
+/*订单评论*/
+.comment .order-info .weui-media-box__thumb {
+    border-radius: inherit;
+}
+
+.comment .order-info .weui-media-box__desc {
+    font-size: 4vw;
+    line-height: 6vw;
+    color: #404040;
+}
+
+.comment .order-info .weui-media-box__ft {
+    font-size: 4vw;
+    line-height: 6vw;
+    color: #404040;
+    text-align: right;
+}
+
+.comment .weui-cells_form {
+    margin-top: 3vw;
+}
+
+.comment .content .weui-cell__bd {
+    border: 1px solid #c9c4c4;
+}
+
+.comment .picture:before {
+    border-top: inherit;
+}
+
+.comment .experience {
+    display: inherit;
+}
+
+.comment .experience .title {
+    font-size: 4vw;
+    color: #404040;
+}
+
+.comment .experience button {
+    background: url(/static/home/images/btn_pingjia_normal.png) no-repeat;
+    width: 27vw;
+    height: 9vw;
+    background-size: 100% 100%;
+    border: none;
+    margin: 0 1vw;
+    font-size: 4vw;
+    color: #333333;
+}
+
+.comment .experience button.choice_on {
+    background: url(/static/home/images/btn_pingjia_press.png) no-repeat;
+    background-size: 100% 100%;
+    color: #ff6600;
+}
+
+.comment .score .weui-cells__title {
+    font-size: 4.5vw;
+    color: #404040;
+    line-height: 5vw;
+}
+
+.comment .score .weui-cell__hd {
+    font-size: 4vw;
+    color: #404040;
+    padding-right: 6vw;
+}
+
+.comment .score .weui-cell__bd img {
+    width: 10%;
+    padding: 0 2vw;
+}
+
+.comment .weui-navbar {
+    position: relative;
+    padding: 4vw 0;
+}
+
+.comment .weui-navbar .weui-navbar__item {
+    background: url(/static/home/images/btn_normal.png) no-repeat;
+    background-size: 100% 100%;
+    border: none;
+    margin: 0 2%;
+    padding: 1vw 0;
+    font-size: 3.5vw;
+    line-height: 6vw;
+    color: #404040;
+}
+
+.comment .weui-navbar .weui-bar__item_on {
+    background: url(/static/home/images/btn_press.png) no-repeat;
+    background-size: 100% 100%;
+    color: #ffffff;
+}
+
+.comment .weui-tab {
+    height: auto;
+}
 
 
 

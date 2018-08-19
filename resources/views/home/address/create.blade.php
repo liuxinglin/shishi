@@ -4,9 +4,9 @@
         <div class="page__bd">
             <div class="weui-cells weui-cells_form" style="margin-top: 0px">
                 <div class="weui-cell">
-                    <div class="weui-cell__hd"><label class="weui-label">收货人</label></div>
+                    <div class="weui-cell__hd"><label class="weui-label">联系人</label></div>
                     <div class="weui-cell__bd">
-                        <input class="weui-input" type="text" name="contacts" placeholder="请输入收货人姓名"/>
+                        <input class="weui-input" type="text" name="contacts" placeholder="请输入联系人姓名"/>
                     </div>
                 </div>
                 <div class="weui-cell">
@@ -15,30 +15,13 @@
                         <input class="weui-input" type="text" name="phone" placeholder="请输入收货人联系电话"/>
                     </div>
                 </div>
-                <div class="weui-cell weui-cell_select weui-cell_select-after">
-                    <div class="weui-cell__hd">
-                        <label for="" class="weui-label">国家/地区</label>
-                    </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">所在地区</label></div>
                     <div class="weui-cell__bd">
-                        <select class="weui-select" name="select2">
-                            <option value="1">中国</option>
-                            <option value="2">美国</option>
-                            <option value="3">英国</option>
-                        </select>
+                        <input class="weui-input" type="text" name="area" placeholder="请输入所在地区"/>
                     </div>
                 </div>
-                <div class="weui-cell weui-cell_select weui-cell_select-after">
-                    <div class="weui-cell__hd">
-                        <label for="" class="weui-label">街道</label>
-                    </div>
-                    <div class="weui-cell__bd">
-                        <select class="weui-select" name="select2">
-                            <option value="1">中国</option>
-                            <option value="2">美国</option>
-                            <option value="3">英国</option>
-                        </select>
-                    </div>
-                </div>
+
                 <div class="weui-cells weui-cells_form"  style="margin-top: 0px">
                     <div class="weui-cell">
                         <div class="weui-cell__bd">

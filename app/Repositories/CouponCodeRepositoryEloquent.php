@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\CouponCodeRepository;
@@ -33,6 +34,12 @@ class CouponCodeRepositoryEloquent extends BaseRepository implements CouponCodeR
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function insertAll($data)
+    {
+        $result = DB::table($this->model->getTable())->insert($data);
+        return $result;
     }
     
 }

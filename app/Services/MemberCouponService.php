@@ -19,4 +19,9 @@ class MemberCouponService
     {
         $this->repository = $memberCoupon;
     }
+
+    public function insertAll($data)
+    {
+        return $this->repository->insertAll($data);
+    }
 }

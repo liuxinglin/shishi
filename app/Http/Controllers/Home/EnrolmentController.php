@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Formatters\AppFormatter;
 use App\Services\EnrolmentService;
+use App\Services\MemberAddressService;
 use EasyWeChat\Factory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -35,7 +36,13 @@ class EnrolmentController extends Controller
      */
     public function create()
     {
-        //
+        $where = [
+            'member_id' => session('member.id'),
+            'is_default' => 1
+        ];
+        $memberAddressService = app()->make(MemberAddressService::class);
+        $memberAddress = $memberAddressService->getAddressInfo($where);
+        return view('home.enrolment.create', compact('memberAddress'));
     }
 
     /**
@@ -80,8 +87,9 @@ class EnrolmentController extends Controller
             $where['tryout_id'] = $data['tryout_id'];
         }
         $data = $this->service->getDetails($where);
-        $config = config('wechat.official_account.default');
-        $app = Factory::officialAccount($config);
+//        $config = config('wechat.official_account.default');
+//        $app = Factory::officialAccount($config);
+        $app = [];
         return view('home.enrolment.show', compact('data', 'app'));
     }
 

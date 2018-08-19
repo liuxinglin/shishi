@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Services\EnrolmentService;
 use App\Services\TryoutProductService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -57,7 +58,10 @@ class TryoutProductController extends Controller
     {
         $id = $request->get('id', '');
         $data = $this->service->getDetails($id);
-        return view('home.tryout_product.show', compact('data'));
+        app()->bind('EnrolmentService', EnrolmentService::class);
+        $enrolmentService = app()->make('EnrolmentService');
+        $isEnrolment = $enrolmentService->isEnrolment($id, session('member.id'));
+        return view('home.tryout_product.show', compact('data', 'isEnrolment'));
     }
 
     /**

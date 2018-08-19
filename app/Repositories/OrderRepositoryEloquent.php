@@ -39,4 +39,18 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
     {
         return $this->model->with('product')->where($where)->get()->toArray();
     }
+
+    public function getOrderInfo($id)
+    {
+        $result = $this->model->with('product')->where('order_id', $id)->first();
+        if (!empty($result)) {
+            $result = $result->toArray();
+        }
+        return $result;
+    }
+
+    public function updateCommentStatus($order_id, $status)
+    {
+        return $this->model->where('order_id', $order_id)->update(['is_comment' => $status]);
+    }
 }

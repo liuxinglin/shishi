@@ -39,4 +39,9 @@ class MemberAddressService
         }
         return $result;
     }
+
+    public function getAddressInfo($where)
+    {
+        return $this->repository->getAddressInfo($where);
+    }
 }

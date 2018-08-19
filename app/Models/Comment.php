@@ -23,11 +23,13 @@ class Comment extends Model implements Transformable
      */
     protected $fillable = [
         'product_id',
+        'order_id',
         'member_id',
         'nickname',
         'headimgurl',
         'content',
         'pictures',
+        'experience',
         'score',
         'status'
     ];

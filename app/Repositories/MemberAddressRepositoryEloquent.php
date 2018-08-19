@@ -34,5 +34,14 @@ class MemberAddressRepositoryEloquent extends BaseRepository implements MemberAd
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    public function getAddressInfo($where)
+    {
+        $result = $this->model->where($where)->first();
+        if(!empty($result)) {
+            $result = $result->toArray();
+        }
+        return $result;
+    }
     
 }

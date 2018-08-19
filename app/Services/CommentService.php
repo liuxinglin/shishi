@@ -20,14 +20,25 @@ class CommentService
         $this->repository = $comment;
     }
 
-    public function add(Request $request)
+    public function add($data)
     {
-        $data = $request->except('_token');
+        //获取会员详细信息
+        app()->bind('MemberService', \App\Services\MemberService::class);
+        $model = app()->make('MemberService');
+        $memberInfo = $model->getDetails($data['member_id']);
+        $data['nickname'] = $memberInfo['nickname'];
+        $data['headimgurl'] = $memberInfo['headimgurl'];
+        $data['status'] = 0;
         $result = $this->repository->create($data);
+        if (!empty($result)) {
+            app()->bind('OrderService', \App\Services\OrderService::class);
+            $orderModel = app()->make('OrderService');
+            $orderModel->updateCommentStatus($data['order_id'], 1);
+        }
         return $result;
     }
 
-    public function getList($where, $total = true)
+    public function getCommentList($where, $total = true)
     {
         return $this->repository->getList($where, $total);
     }

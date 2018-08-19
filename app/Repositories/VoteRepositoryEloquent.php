@@ -45,7 +45,12 @@ class VoteRepositoryEloquent extends BaseRepository implements VoteRepository
 
     public function getVoteList($where)
     {
-        $result = $this->model->where($where)->get()->toArray();
+        $result = $this->model;
+        if(isset($where['in'])) {
+            $result = $result->whereIn('member_id', $where['in']);
+            unset($where['in']);
+        }
+        $result = $result->where($where)->get()->toArray();
         return $result;
     }
 

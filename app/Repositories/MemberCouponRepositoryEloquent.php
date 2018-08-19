@@ -7,6 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\MemberCouponRepository;
 use App\Models\MemberCoupon;
 use App\Validators\MemberCouponValidator;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class MemberCouponRepositoryEloquent.
@@ -34,5 +35,10 @@ class MemberCouponRepositoryEloquent extends BaseRepository implements MemberCou
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
+    public function insertAll($data)
+    {
+        $result = DB::table($this->model->getTable())->insert($data);
+        return $result;
+    }
 }

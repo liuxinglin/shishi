@@ -2,7 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Services\CouponCodeService;
+use App\Services\MemberCouponService;
 use App\Services\OrderService;
+use App\Services\VoteService;
 use App\Tool\BLogger;
 use Illuminate\Console\Command;
 
@@ -67,11 +70,50 @@ class CloseTryout extends Command
                         $orderInfo = [
                             'member_id' => $v['member_id'],
                             'nickname' => $v['nickname'],
-                            'member_address_id' => $v['member_address_id'],
+                            'area' => $v['area'],
+                            'address' => $v['address'],
                             'total' => 0,
                             'product_id' => $v['product_id']
                         ];
                         $orderModel->addTryOutOrder($orderInfo);
+                    }
+                    //获取参与投票用户
+                    $enrolmentIds = array_column($enrolmentList['list'], 'member_id');
+                    app()->bind('VoteService', VoteService::class);
+                    $voteModel = app()->make('VoteService');
+                    $voteList = $voteModel->getVoteList(['in' => $enrolmentIds]);
+                    $voteIds = array_column($voteList, 'member_id');
+                    if (!empty($voteList)) {
+                        //生成优惠码
+                        app()->bind('CouponCodeService', CouponCodeService::class);
+                        $couponCodeModel = app()->make('CouponCodeService');
+                        $couponCodeList = $couponCodeModel->createCouponCode(count($voteList), '', 6);
+                        $couponCodeData = [];
+                        $memberCouponData = [];
+                        foreach ($couponCodeList as $key => $value) {
+                            $arr = [
+                                'coupon_id' => 1,
+                                'coupon_code' => $value,
+                                'coupon_code_status' => 1,
+                                'created_at' => time(),
+                                'updated_at' => time(),
+                            ];
+                            $memberCouponArr = [
+                                'member_id' => $voteIds[$key],
+                                'coupon_id' => 1,
+                                'coupon_code' => $value,
+                                'member_coupon_status' => 0,
+                                'created_at' => time(),
+                                'updated_at' => time(),
+                            ];
+                            $couponCodeData[] = $arr;
+                            $memberCouponData[] = $memberCouponArr;
+                        }
+                        $couponCodeModel->insertAll($couponCodeData);
+                        //给投票用户发放优惠码
+                        app()->bind('MemberCouponService', MemberCouponService::class);
+                        $memberCouponModel = app()->make('MemberCouponService');
+                        $memberCouponModel->insertAll($memberCouponData);
                     }
                 }
             }

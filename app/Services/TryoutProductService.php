@@ -36,11 +36,11 @@ class TryoutProductService
         //查询报名信息
         app()->bind('EnrolmentService', \App\Services\EnrolmentService::class);
         $model = app()->make('EnrolmentService');
-        $result['enrolments'] = $model->getList(['tryout_id' => $result['id']], true);
+        $result['enrolments'] = $model->getEnrolmentList(['tryout_id' => $result['id']], 0, 5, true);
         //查询评论信息
         app()->bind('CommentService', \App\Services\CommentService::class);
         $model = app()->make('CommentService');
-        $result['comments'] = $model->getList(['product_id' => $result['product_id']], true);
+        $result['comments'] = $model->getCommentList(['product_id' => $result['product_id']], true);
         return $result;
     }
 }

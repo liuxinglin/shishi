@@ -23,6 +23,7 @@ class TryoutProduct extends Model implements Transformable
     protected $fillable = [
         'product_id',
         'quantity',
+        'description',
         'signup_num',
         'begin_date',
         'end_date',
