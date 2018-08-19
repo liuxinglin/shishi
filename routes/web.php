@@ -61,7 +61,7 @@ Route::group(['namespace' => 'Home'], function () {
         Route::get('/orders/details', 'OrderController@show');
         //我的优惠券
         Route::get('/member/coupons', 'MemberCouponController@index');
-        Route::post('/payment/notify', 'PaymentController@notify');
+        Route::any('/payments/notify', 'PaymentController@notify');
     });
 });
 
