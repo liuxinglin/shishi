@@ -21,7 +21,7 @@
                         <p>待付款</p>
                     </a>
                     <div class="weui-media-box__bd"></div>
-                    <a class="weui-media-box__bd"  href="/orders/index?order_status=2">
+                    <a class="weui-media-box__bd"  href="/orders/index?order_status=1">
                         <img class="weui-media-box__thumb" src="/static/home/images/btn_info_notget.png" alt="">
                         <p>待收货</p>
                     </a>
