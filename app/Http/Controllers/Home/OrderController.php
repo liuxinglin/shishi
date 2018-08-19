@@ -8,6 +8,7 @@ use App\Services\MemberSnsService;
 use App\Services\OrderService;
 use App\Services\PaymentService;
 use App\Services\ProductService;
+use App\Tool\BLogger;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EasyWeChat\Factory;
