@@ -18,7 +18,7 @@ class PaymentController extends Controller
     public function notify(Request $request)
     {
         $callBack = $request->except('_token');
-        BLogger::getLogger('pay')->info('支付回调信息：'.json_encode($callBack));
+        BLogger::getLogger('pay')->info('支付回调信息：'.$callBack);
 //        $response = $app->handlePaidNotify(function($message, $fail){
 //            // 使用通知里的 "微信支付订单号" 或者 "商户订单号" 去自己的数据库找到订单
 //            $order = 查询订单($message['out_trade_no']);
@@ -48,6 +48,6 @@ class PaymentController extends Controller
 //            return true; // 返回处理完成
 //        });
 
-        return $response;
+        return 111;
     }
 }
