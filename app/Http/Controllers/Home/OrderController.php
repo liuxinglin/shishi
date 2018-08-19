@@ -80,6 +80,8 @@ class OrderController extends Controller
             if (($preOrder['return_code'] == 'SUCCESS') && ($preOrder['return_msg'] == 'OK')) {
                 $getJsApiParameters = $paymentModel->getJsApiParameters($preOrder['prepay_id']);
                 return view('home.order.show', compact('orderInfo', 'getJsApiParameters'));
+            } else {
+                return response();
             }
         } catch (\Exception $e) {
             BLogger::getLogger('payment')->info('支付信息：'.json_encode($e));

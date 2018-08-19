@@ -40,4 +40,9 @@ class PaymentService
         $json = $jssdk->bridgeConfig($prepay_id);
         return $json;
     }
+
+    public function notify($callback)
+    {
+
+    }
 }
