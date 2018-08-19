@@ -45,7 +45,7 @@
                                         <span>需付款：￥{{ $order['total'] }}</span>
                                         <a href="#">待收货</a>
                                     </p>
-                                @elseif(($order['order_status'] == 3) && ($order['comment_status'] == 0))
+                                @elseif(($order['order_status'] == 3) && ($order['is_comment'] == 0))
                                     <p class="weui-media-box__desc">
                                         <span>付款：￥{{ $order['total'] }}</span>
                                         <a href="/comments/create?order_id={{ $order['order_id'] }}">去评价</a>
