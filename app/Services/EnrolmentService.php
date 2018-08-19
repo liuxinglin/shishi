@@ -69,6 +69,9 @@ class EnrolmentService
         ];
         $result = $this->repository->create($enrolmentInfo);
         if (!empty($result)) {
+            app()->bind('TryoutProductService', TryoutProductService::class);
+            $tryoutService = app()->make('TryoutProductService');
+            $tryoutService->incEnrolmentNum(['id' => $tryoutId], 1);
             $result = $result->toArray();
         }
         return $result;

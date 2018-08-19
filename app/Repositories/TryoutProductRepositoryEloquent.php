@@ -60,4 +60,10 @@ class TryoutProductRepositoryEloquent extends BaseRepository implements TryoutPr
         }
         return $result;
     }
+
+    public function increment($where, $field, $num = 1)
+    {
+        $result = $this->model->where($where)->increment($field, $num);
+        return $result;
+    }
 }

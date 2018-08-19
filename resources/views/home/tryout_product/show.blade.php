@@ -18,7 +18,7 @@
                     <div class="weui-media-box__title">{{ $data['name'] }}</div>
                     <div class="weui-media-box quota">
                         <div class="weui-media-box__hd">
-                            <p>已报名：<span>{{ $data['signup_num'] }}</span></p>
+                            <p>已报名：<span>{{ $data['signup_num'] or 0 }}</span></p>
                         </div>
                         <div class="weui-media-box__bd">
                             <p>剩余名额：<span>{{ $data['quantity'] - $data['signup_num'] }}</span></p>
@@ -77,9 +77,9 @@
                     <div class="weui-media-box__ft">
                         <p class="weui-media-box__title">已获得票数：<span>{{ $value['votes_num'] }}</span></p>
                     </div>
-                    <div class="weui-media-box__ft">
-                        <button>投票</button>
-                    </div>
+                    {{--<div class="weui-media-box__ft">--}}
+                        {{--<button>投票</button>--}}
+                    {{--</div>--}}
                 </div>
                 @endforeach
             </div>

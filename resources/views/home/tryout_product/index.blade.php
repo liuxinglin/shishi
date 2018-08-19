@@ -20,8 +20,8 @@
                 <h4 class="weui-media-box__title">{{ $product['name'] }}</h4>
                 <div class="weui-media-box" style="padding: 0px;overflow: hidden">
                     <div class="weui-media-box__hd">
-                        <p>免费试用名额：<span class="tryput-num">{{ $product['quantity'] }}</span></p>
-                        <p>已报名：<span>{{ $product['signup_num'] }}</span></p>
+                        <p>免费试用名额：<span class="tryput-num">{{ $product['quantity'] or 0 }}</span></p>
+                        <p>已报名：<span>{{ $product['signup_num'] or 0 }}</span></p>
                     </div>
                     <div class="weui-media-box__bd">
                         <a href="/tryoutProducts/details?id={{ $product['id'] }}"><button class="button-try">免费试 ></button></a>

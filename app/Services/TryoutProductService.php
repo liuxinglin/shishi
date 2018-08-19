@@ -24,7 +24,6 @@ class TryoutProductService
 
     }
 
-
     public function getTryoutProductList($where)
     {
         return $this->repository->getList($where);
@@ -42,5 +41,16 @@ class TryoutProductService
         $model = app()->make('CommentService');
         $result['comments'] = $model->getCommentList(['product_id' => $result['product_id']], true);
         return $result;
+    }
+
+    public function update($id, $data)
+    {
+        $result = $this->repository->update($data, $id);
+        return $result;
+    }
+
+    public function incEnrolmentNum($where, $num = 1)
+    {
+        return $this->repository->increment($where, 'signup_num', $num);
     }
 }
