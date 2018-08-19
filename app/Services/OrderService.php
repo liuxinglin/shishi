@@ -40,6 +40,12 @@ class OrderService
         app()->bind('MemberService', \App\Services\MemberService::class);
         $model = app()->make('MemberService');
         $memberInfo = $model->getDetails($data['member_id']);
+
+        //获取地址详细信息
+        app()->bind('MemberAddressService', \App\Services\MemberAddressService::class);
+        $addressModel = app()->make('MemberAddressService');
+        $address = $addressModel->getAddressInfo(['id' => $data['member_address_id']]);
+
         //订单信息
         $orderInfo = [
             'order_type' => 1,
@@ -48,21 +54,27 @@ class OrderService
             'member_group_id' => 1,
             'fullname' => $memberInfo['nickname'],
             'total' => $data['total'],
-            'telphone' => $memberInfo['phone'],
-            'member_address_id' => $data['member_address_id'],
+            'telphone' => $address['phone'],
+            'area' => $address['area'],
+            'address' => $address['address'],
             'order_status' => 0,
             'is_comment' => 0
         ];
+        app()->bind('ProductService', \App\Services\ProductService::class);
+        $productModel = app()->make('ProductService');
+        $productInfo = $productModel->getDetails($data['product_id']);
+
+
         //订单商品信息
         $orderProductList = [
             [
                 'order_id' => $orderInfo['order_id'],
-                'product_id' => 1,
-                'name' => '测试商品',
-                'quantity' => 1,
-                'price' => 1.00,
-                'preview' => '/static/home/images/product.png',
-                'total' => 1.00
+                'product_id' => $data['product_id'],
+                'name' => $productInfo['name'],
+                'quantity' => $data['quantity'],
+                'price' => $productInfo['price'],
+                'preview' => $productInfo['image'],
+                'total' => $productInfo['price']
             ]
         ];
         DB::transaction(function () use ($orderProductList, $orderInfo) {
@@ -82,19 +94,20 @@ class OrderService
     public function addTryOutOrder($data)
     {
         //获取报会员详细信息
-        app()->bind('MemberService', \App\Services\MemberService::class);
-        $model = app()->make('MemberService');
-        $memberInfo = $model->getDetails($data['member_id']);
+//        app()->bind('MemberService', \App\Services\MemberService::class);
+//        $model = app()->make('MemberService');
+//        $memberInfo = $model->getDetails($data['member_id']);
         //订单信息
         $orderInfo = [
             'order_type' => 2,
             'order_id' => $data['member_id'].time(),
             'member_id' => $data['member_id'],
             'member_group_id' => 1,
-            'fullname' => $memberInfo['nickname'],
+            'fullname' => $data['fullname'],
             'total' => $data['total'],
-            'telphone' => $memberInfo['phone'],
-            'member_address_id' => $data['member_address_id'],
+            'telphone' => $data['phone'],
+            'area' => $data['area'],
+            'address' => $data['address'],
             'order_status' => 1,
             'is_comment' => 0
         ];

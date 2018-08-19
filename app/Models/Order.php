@@ -28,9 +28,11 @@ class Order extends Model implements Transformable
         'fullname',
         'total',
         'telphone',
-        'member_address_id',
+//        'member_address_id',
         'order_status',
-        'is_comment'
+        'is_comment',
+        'area',
+        'address'
     ];
     /**
      * 时间转换为时间戳存储

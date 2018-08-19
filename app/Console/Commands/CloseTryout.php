@@ -69,7 +69,8 @@ class CloseTryout extends Command
                     foreach ($enrolmentList['list'] as $v) {
                         $orderInfo = [
                             'member_id' => $v['member_id'],
-                            'nickname' => $v['nickname'],
+                            'fullname' => $v['contacts'],
+                            'phone' => $v['phone'],
                             'area' => $v['area'],
                             'address' => $v['address'],
                             'total' => 0,

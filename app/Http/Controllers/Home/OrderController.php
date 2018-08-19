@@ -45,6 +45,9 @@ class OrderController extends Controller
     {
         try {
             $data = $request->except('_token');
+            if (empty($data['quantity'])) {
+                return response()->json($this->formatter->formatFail(0, [], '购买商品数量不能为空'));
+            }
             $result = $this->service->addOrder($data);
             if (empty($result)) {
                 return response()->json($this->formatter->formatFail(0, [], '下单失败'));

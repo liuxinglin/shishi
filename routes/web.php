@@ -58,6 +58,8 @@ Route::group(['namespace' => 'Home'], function () {
         Route::get('/orders/index', 'OrderController@index');
         Route::get('/orders/create', 'OrderController@create');
         Route::post('/orders/add', 'OrderController@store');
+        //我的优惠券
+        Route::get('/member/coupons', 'MemberCouponController@index');
     });
 });
 

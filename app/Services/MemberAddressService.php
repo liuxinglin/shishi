@@ -32,6 +32,7 @@ class MemberAddressService
         $data['province'] = '广东省';
         $data['city'] = '深圳市';
         $data['county'] = '南山区';
+        $data['area'] = $data['province'].$data['city'].$data['county'];
         $data['type'] = 1;
         $result = $this->repository->create($data);
         if(!empty($result)) {

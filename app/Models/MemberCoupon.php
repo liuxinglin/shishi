@@ -38,4 +38,8 @@ class MemberCoupon extends Model implements Transformable
         return strtotime(parent::fromDateTime($value));
     }
 
+    public function coupon()
+    {
+        return $this->belongsTo('App\Models\Coupon', 'coupon_id', 'id');
+    }
 }

@@ -77,9 +77,9 @@
                     <div class="weui-media-box__ft">
                         <p class="weui-media-box__title">已获得票数：<span>{{ $value['votes_num'] }}</span></p>
                     </div>
-                    {{--<div class="weui-media-box__ft">--}}
-                        {{--<button>投票</button>--}}
-                    {{--</div>--}}
+                    <div class="weui-media-box__ft">
+                        <button>投票</button>
+                    </div>
                 </div>
                 @endforeach
             </div>

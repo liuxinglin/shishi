@@ -239,6 +239,25 @@ img {
     font-size: 4vw;
 }
 
+/**商品详情*/
+.product .tool-bar .collection {
+    width: 50%;
+    text-align: center;
+    border-right:none;
+}
+
+.product .tool-bar .buy  {
+    float: right;
+    width: 49.5%;
+    height: 13vw;
+    background-color: red;
+}
+.product .tool-bar .buy p {
+    font-size: 5vw;
+    line-height: 12vw;
+    color: #ffffff;
+}
+
 .tryout .quota {
     padding: 0px;
     overflow: hidden;
@@ -356,7 +375,7 @@ img {
     background-color: red;
 }
 
-.tool-bar .submit {
+.tool-bar .submit{
     float: right;
     width: 49.5%;
     background-color: red;
@@ -656,6 +675,18 @@ img {
     height: auto;
 }
 
+.order .tool-bar .buy  {
+    float: right;
+    width: 49.5%;
+    height: 13vw;
+    background-color: red;
+}
+.order .tool-bar .buy p {
+    font-size: 5vw;
+    line-height: 12vw;
+    color: #ffffff;
+}
+
 .order-list .weui-media-box__thumb {
     border-radius: 8%;
 }
@@ -862,6 +893,77 @@ img {
 
 .comment .weui-tab {
     height: auto;
+}
+
+/**优惠券列表**/
+.coupons .weui-navbar__item{
+    margin: 0 12%;
+    padding: 3vw 0;
+    font-size: 4.5vw;
+    line-height: 5vw;
+
+}
+
+.coupons .weui-tab {
+    overflow: inherit;
+    margin-top: 15vw;
+    height: auto;
+}
+
+.coupon-list .weui-panel:after {
+    border-bottom: none;
+}
+
+.coupon-list .weui-panel:before {
+    border-top: none;
+}
+
+.coupon-list .weui-panel {
+    background-color: #f8f8f8;
+}
+
+.coupon-list .weui-media-box {
+    background: url(/static/home/images/img_ticketBG.png) no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+    margin: 0 3vw 0;
+    padding: 3vw 0;
+}
+
+.coupon-list .weui-media-box_appmsg .weui-media-box__hd {
+    width: 33vw;
+    margin-right: 5vw;
+    font-size: 3.5vw;
+    color: #FFFFFF;
+    text-align: center;
+    height: auto;
+    line-height: 8vw;
+
+}
+
+.coupon-list .weui-media-box_appmsg .weui-media-box__hd h3 {
+    font-size: 7vw;
+}
+
+.coupon-list .weui-media-box__title {
+    font-size: 4vw;
+    line-height: 7vw;
+}
+
+.coupon-list .weui-media-box__bd {
+    padding-right: 2vw;
+}
+
+.coupon-list .weui-media-box__desc {
+    font-size: 3.5vw;
+    line-height: 6vw;
+}
+
+.coupon-list .weui-media-box__desc a {
+    background: url(/static/home/images/btn_use.png) no-repeat;
+    background-size: 100% 100%;
+    padding: 1vw 8vw;
+    margin-left: 2vw;
 }
 
 

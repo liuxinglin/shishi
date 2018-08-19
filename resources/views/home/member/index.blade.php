@@ -32,10 +32,10 @@
                     </a>
                 </div>
                 <div class="weui-media-box weui-media-box_appmsg">
-                    <div class="weui-media-box__bd">
+                    <a class="weui-media-box__bd" href="/member/coupons">
                         <img class="weui-media-box__thumb" src="/static/home/images/btn_info_off.png" alt="">
                         <p>优惠资格</p>
-                    </div>
+                    </a>
                     <div class="weui-media-box__bd"></div>
                     <div class="weui-media-box__bd">
                         <img class="weui-media-box__thumb" src="/static/home/images/btn_info_like.png" alt="">

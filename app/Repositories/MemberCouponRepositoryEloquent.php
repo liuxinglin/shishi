@@ -41,4 +41,10 @@ class MemberCouponRepositoryEloquent extends BaseRepository implements MemberCou
         $result = DB::table($this->model->getTable())->insert($data);
         return $result;
     }
+
+    public function getCouponList($where)
+    {
+        $result = $this->model->with('coupon')->where($where)->get()->toArray();
+        return $result;
+    }
 }

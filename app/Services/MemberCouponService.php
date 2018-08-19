@@ -24,4 +24,9 @@ class MemberCouponService
     {
         return $this->repository->insertAll($data);
     }
+
+    public function getCouponList($where)
+    {
+        return $this->repository->getCouponList($where);
+    }
 }

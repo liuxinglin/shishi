@@ -71,7 +71,7 @@
                 <p class="weui-tabbar__label" style="color: #FF564C;font-size: 4.5vw;line-height: 12vw">实付款：￥<span class="total">0.00</span></p>
             </a>
 
-            <a href="javascript:;" data-url="/orders/add" class="weui-tabbar__item signup">
+            <a href="javascript:;" data-url="/orders/add" class="weui-tabbar__item buy">
                 <p class="weui-tabbar__label">立即下单</p>
             </a>
         </div>
@@ -89,11 +89,19 @@
             total = price * quantity;
             $('.total').text(total);
         });
-        $('.signup').click(function () {
+        $('.buy').click(function () {
             var member_id = '{{ session('member.id') }}';
             var member_address_id = $("input[ name='address_id']").val();
             var product_id = '{{ $product['id'] }}';
             var url = $(this).attr('data-url');
+            if(quantity == 0) {
+                layer.open({
+                    content: '购买商品数量不能为空'
+                    ,skin: 'msg'
+                    ,time: 2 //2秒后自动关闭
+                })
+                return false;
+            }
             $.ajax({
                 type: 'POST',
                 url: url,
