@@ -87,9 +87,9 @@ class EnrolmentController extends Controller
             $where['tryout_id'] = $data['tryout_id'];
         }
         $data = $this->service->getDetails($where);
-//        $config = config('wechat.official_account.default');
-//        $app = Factory::officialAccount($config);
-        $app = [];
+        $config = config('wechat.official_account.default');
+        $app = Factory::officialAccount($config);
+//        $app = [];
         return view('home.enrolment.show', compact('data', 'app'));
     }
 
