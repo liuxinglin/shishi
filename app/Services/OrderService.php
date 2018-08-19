@@ -141,6 +141,12 @@ class OrderService
         return $result;
     }
 
+    public function update($data, $order_id)
+    {
+        $result = $this->repository->update($data, $order_id);
+        return $result;
+    }
+
     public function updateCommentStatus($order_id, $status)
     {
         $result = $this->repository->updateCommentStatus($order_id, $status);

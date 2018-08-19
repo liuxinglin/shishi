@@ -53,4 +53,10 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
     {
         return $this->model->where('order_id', $order_id)->update(['is_comment' => $status]);
     }
+
+    public function update(array $attributes, $id)
+    {
+        // TODO: Implement update() method.
+        return $this->model->where('order_id', $id)->update($attributes);
+    }
 }
