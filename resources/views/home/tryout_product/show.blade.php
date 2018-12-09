@@ -66,7 +66,24 @@
                 </a>
             </div>
             <div class="weui-panel__bd">
+                @if($isEnrolment)
+                    <div class="weui-media-box weui-media-box_appmsg">
+                        <div class="weui-media-box__hd">
+                            <img class="weui-media-box__thumb" src="{{ $isEnrolment['member']['headimgurl'] }}" alt="">
+                        </div>
+                        <div class="weui-media-box__bd">
+                            <h4 class="weui-media-box__title">{{ $isEnrolment['nickname'] }}</h4>
+                        </div>
+                        <div class="weui-media-box__ft">
+                            <p class="weui-media-box__title">已获得票数：<span>{{ $isEnrolment['votes_num'] }}</span></p>
+                        </div>
+                        <div class="weui-media-box__ft">
+                            <button>投票</button>
+                        </div>
+                    </div>
+                @endif
                 @foreach($data['enrolments']['list'] as $value)
+                    @if($value['member']['id'] != session('member.id'))
                 <div class="weui-media-box weui-media-box_appmsg">
                     <div class="weui-media-box__hd">
                         <img class="weui-media-box__thumb" src="{{ $value['member']['headimgurl'] }}" alt="">
@@ -81,6 +98,7 @@
                         <button>投票</button>
                     </div>
                 </div>
+                        @endif
                 @endforeach
             </div>
         </div>
@@ -117,12 +135,12 @@
             {{--</div>--}}
         {{--</div>--}}
         <div class="weui-panel product-content">
-            {{--<div class="weui-panel__bd">商品详情</div>--}}
-            {{--<div class="weui-panel__bd" style="border-top:1px solid #E5E5E5">--}}
-                {{--<div class="weui-media-box weui-media-box_text">--}}
-                    {{--{{ $data['description'] }}--}}
-                {{--</div>--}}
-            {{--</div>--}}
+            <div class="weui-panel__bd">商品详情</div>
+            <div class="weui-panel__bd" style="border-top:1px solid #E5E5E5">
+                <div class="weui-media-box weui-media-box_text">
+                    {{ $data['description'] }}
+                </div>
+            </div>
         </div>
         <div class="weui-tabbar tool-bar">
             @if(!$isEnrolment)
@@ -130,7 +148,7 @@
                     <p class="weui-tabbar__label">我要报名</p>
                 </a>
             @else
-                <a href="/enrolments/details?id={{ $isEnrolment }}" class="weui-tabbar__item signup">
+                <a href="/enrolments/details?id={{ $isEnrolment['id'] }}" class="weui-tabbar__item signup">
                     <p class="weui-tabbar__label">已报名，去分享</p>
                 </a>
             @endif

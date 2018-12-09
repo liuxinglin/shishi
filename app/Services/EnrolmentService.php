@@ -116,6 +116,10 @@ class EnrolmentService
         if (empty($result)) {
             return 0;
         }
-        return $result['id'];
+        //获取报名人相信信息
+        app()->bind('MemberService', \App\Services\MemberService::class);
+        $model = app()->make('MemberService');
+        $result['member'] = $model->getDetails($result['member_id']);
+        return $result;
     }
 }

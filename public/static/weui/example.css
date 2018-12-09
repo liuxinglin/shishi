@@ -59,6 +59,26 @@ img {
     width: 100%;
     height: 100%;
 }
+
+.product-list .end-time {
+    position: absolute;
+    background: url(/static/home/images/img_tab.png) no-repeat;
+    width:30vw;
+    height:10vw;
+    background-size:100% 100%;
+    text-align: left;
+    z-index: 100;
+    position: absolute;
+    top: 4vw;
+}
+
+.product-list .end-time p {
+    color: #ffffff;
+    line-height: 10vw;
+    padding-left: 3vw;
+    padding-right: 3vw;
+}
+
 .product-list .weui-media-box_text {
     padding: 1vw 3vw 3vw;
 }

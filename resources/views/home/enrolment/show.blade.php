@@ -33,8 +33,11 @@
         <div class="weui-panel votes-info">
             <div class="weui-panel__bd">已获得<span>{{ $data['votes_num'] }}</span>票，离第一名还差<span>{{ $data['vote']['maxVoteNum'] - $data['votes_num'] }}</span>票，加油</div>
             <button class="share">分享给好友，投我一票</button>
+            <a href="/tryoutProducts/details?id={{ $data['tryout_id'] }}"><button class="enrol-my">查看报名列表</button></a>
+            @if($data['member']['id'] != session('member.id'))
             <button class="share vote" data-url="/votes/add">帮好友投一票</button>
             <a href="/tryoutProducts/details?id={{ $data['tryout_id'] }}"><button class="enrol-my">我也要免费拿</button></a>
+                @endif
         </div>
 
         <div class="weui-panel weui-panel_access votes-friend">

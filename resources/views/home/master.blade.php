@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
-    <title>试试</title>
+    <title>520幸福家</title>
     <link rel="stylesheet" href="/static/weui/style/weui.css"/>
     <link rel="stylesheet" href="/static/weui/example.css"/>
     <link rel="stylesheet" href="/static/swiper/swiper-4.3.3.min.css">
